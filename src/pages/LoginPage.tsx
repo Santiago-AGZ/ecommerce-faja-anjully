@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+
 export const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPasssword] = useState('')

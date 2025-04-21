@@ -43,7 +43,6 @@ export const RegisterPage = () => {
         console.log(data)
     })
 
-    console.log(errors)
     return (
         <div className='h-full flex flex-col items-center mt-12 gap-5'>
             <h1 className='text-4xl font-bold capitalize'>Regístrate</h1>
