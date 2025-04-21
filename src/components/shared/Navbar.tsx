@@ -32,7 +32,7 @@ export const Navbar = () => {
                 </button>
                 <div className="relative">
                     <Link
-                        to="/account"
+                        to="/login"
                         className="border-2 border-[#f3c1c0] w-9 h-9 rounded-full grid place-items-center text-lg font-bold text-[#f3c1c0] hover:border-[#f4c4c2] hover:text-[#f4c4c2]"
                     >
                         R
