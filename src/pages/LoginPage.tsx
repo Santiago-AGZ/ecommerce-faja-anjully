@@ -29,7 +29,7 @@ export const LoginPage = () => {
                             value={password} onChange={(e) => setPasssword(e.target.value)} />
                     </div>
 
-                    <Button variant="secondary" className="cursor-pointer" onClick={()=>window.open("https://www.youtube.com/watch?v=f_WuRfuMXQw&ab_channel=SheeshBruh")}>Iniciar sesión</Button>
+                    <Button variant="secondary" className="cursor-pointer">Iniciar sesión</Button>
                 </form>
                 <p>¿No tienes una cuenta?
                 <Link to="/register" className="text-pink-500 hover:underline"> Regístrate</Link>
