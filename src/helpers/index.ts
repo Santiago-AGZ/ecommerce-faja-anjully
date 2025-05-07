@@ -1,14 +1,15 @@
 import { Color, Product, VariantProduct } from '../interfaces';
 
-// Función para formatear el precio a dólares
+// Función para formatear el precio a COP (Peso colombiano)
 export const formatPrice = (price: number) => {
-	return new Intl.NumberFormat('en-US', {
+	return new Intl.NumberFormat('es-CO', {
 		style: 'currency',
-		currency: 'USD',
+		currency: 'COP',
 		minimumFractionDigits: 2,
 		maximumFractionDigits: 2,
 	}).format(price);
 };
+
 
 // Función para preparar los productos - (CELULARES)
 export const prepareProducts = (products: Product[]) => {
