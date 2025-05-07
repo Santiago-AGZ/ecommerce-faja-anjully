@@ -1,4 +1,4 @@
-import { PreparedProducts } from '../../interfaces';
+import { PreparedProducts } from '../interfaces';
 import { CardProduct } from './products/CardProduct';
 
 interface Props {
