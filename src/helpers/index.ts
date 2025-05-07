@@ -1,4 +1,4 @@
-import { Color, Product, VariantProduct } from "@/interfaces/product.interface";
+import { Color, Product, VariantProduct } from "../interfaces";
 
 // Función para formatear el precio a pesos colombianos
 export const formatPrice = (price: number) => {
