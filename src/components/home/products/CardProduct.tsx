@@ -1,5 +1,5 @@
-import { formatPrice } from "@/helpers";
-import { VariantProduct } from "@/interfaces";
+import { formatPrice } from "../helpers";
+import { VariantProduct } from "../interfaces";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
