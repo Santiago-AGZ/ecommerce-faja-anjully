@@ -1,5 +1,5 @@
 import { PreparedProducts } from '../../interfaces';
-import { CardProduct } from './products/CardProduct';
+import { CardProduct } from '../products/CardProduct';
 
 interface Props {
 	title: string;
