@@ -1,7 +1,7 @@
+import { Database } from "./supabase";
 import { createClient } from '@supabase/supabase-js'
-import { Database } from './supabase';
-const supabasekey= import.meta.env.VITE_SUPABASE_KEY;
-const supabaseurl= import.meta.env.VITE_SUPABASE_API_URL;
+const supabasekey= import.meta.env.VITE_PROJECT_SUPABASE_API_KEY;
+const supabaseurl= import.meta.env.VITE_PROJECT_URL_SUPABASE;
 
 
 
