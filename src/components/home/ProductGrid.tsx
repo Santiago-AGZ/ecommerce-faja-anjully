@@ -1,9 +1,9 @@
-import { PreparedProducts } from '../../interfaces';
 import { CardProduct } from '../products/CardProduct';
+import { PreparedProduct } from '../../interfaces';
 
 interface Props {
 	title: string;
-	products: PreparedProducts[];
+	products: PreparedProduct[];
 }
 
 export const ProductGrid = ({ title, products }: Props) => {
