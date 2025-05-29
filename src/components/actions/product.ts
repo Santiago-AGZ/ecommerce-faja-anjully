@@ -1,6 +1,6 @@
 import { supabase } from "@/supabase/client";
 
-export const getproducts = async (page: number = 1) => {
+export const getproducts = async () => {
   const { data: products, error } = await supabase
     .from("products")
     .select("*,variants (*)")

@@ -1,7 +1,7 @@
-interface Props {
-    totalItems: number;
-    page: number;
-}
+// interface Props {
+//     totalItems: number;
+//     page: number;
+// }
 
 export const Pagination = () => {
   return (
