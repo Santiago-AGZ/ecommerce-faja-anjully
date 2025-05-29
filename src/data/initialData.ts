@@ -1,673 +1,347 @@
-export const allCelulares = [
-	{
-		brand: 'Samsung',
-		colors: [{ color: '#000000', color_name: 'Negro' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['8GB RAM', 'Dual SIM', 'Cámara trasera de 48MP'],
-		id: '4f53b2ea-2a40-4ec7-a6d0-b7c95888ff',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Samsung A55 5G',
-		price: 449.99,
-		slug: 'samsung-a55-5g',
-		variants: [
-			{
-				color: '#000000',
-				color_name: 'Negro',
-				id: 'a4e814b7-fe26-4e08-8a6f-13a39da43e52',
-				price: 449.99,
-				stock: 10,
-				storage: '256GB',
-			},
-		],
-	},
-	{
-		brand: 'Apple',
-		colors: [{ color: '#FFFFFF', color_name: 'Blanco' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['128GB Storage', 'Face ID', 'Cámara frontal de 12MP'],
-		id: '1b3c2de7-3a10-4e9b-b8e7-b5c8a1234563',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'iPhone 13',
-		price: 999.99,
-		slug: 'iphone-13',
-		variants: [
-			{
-				color: '#FFFFFF',
-				color_name: 'Blanco',
-				id: 'a3f1a5b7-fe26-4e08-8b7e-16a45cd43f11',
-				price: 999.99,
-				stock: 5,
-				storage: '128GB',
-			},
-		],
-	},
-	{
-		brand: 'Xiaomi',
-		colors: [{ color: '#FF0000', color_name: 'Rojo' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['6GB RAM', 'Batería 5000mAh', 'Pantalla 90Hz'],
-		id: 'e5a1d2be-5b60-4f3e-b8d1-a3c98c123abd',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Xiaomi Redmi Note 10',
-		price: 299.99,
-		slug: 'xiaomi-redmi-note-10',
-		variants: [
-			{
-				color: '#FF0000',
-				color_name: 'Rojo',
-				id: 'b2c3d4f5-fe26-4e08-8e0f-17a58bd43c12',
-				price: 299.99,
-				stock: 15,
-				storage: '128GB',
-			},
-		],
-	},
-	{
-		brand: 'Huawei',
-		colors: [{ color: '#0000FF', color_name: 'Azul' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['128GB RAM', 'Pantalla OLED', 'Carga rápida'],
-		id: 'f8c3b4a9-4d3a-4f6b-a8d1-b3c78c143cde',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Huawei P40 Pro',
-		price: 799.99,
-		slug: 'huawei-p40-pro',
-		variants: [
-			{
-				color: '#0000FF',
-				color_name: 'Azul',
-				id: 'c1d2e3f4-fe26-4e08-8f1e-18a69bd45d13',
-				price: 799.99,
-				stock: 8,
-				storage: '256GB',
-			},
-		],
-	},
-	{
-		brand: 'Realme',
-		colors: [{ color: '#FFA500', color_name: 'Naranja' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['6GB RAM', 'Snapdragon 870', 'Cámara 64MP'],
-		id: 'c1f7e6d8-7c5d-4e8b-a9f0-b3d88b987abc',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Realme GT',
-		price: 499.99,
-		slug: 'realme-gt',
-		variants: [
-			{
-				color: '#FFA500',
-				color_name: 'Naranja',
-				id: 'j8k9l0m1-fe26-4e08-9j8i-25a38gf12k20',
-				price: 499.99,
-				stock: 10,
-				storage: '128GB',
-			},
-		],
-	},
-	{
-		brand: 'Honor',
-		colors: [{ color: '#0000FF', color_name: 'Azul' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['8GB RAM', 'Pantalla AMOLED', 'Cámara 108MP'],
-		id: 'f1d2e3b4-6a4c-4f5e-b9e2-a3b18c111bcd',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Honor 50',
-		price: 599.99,
-		slug: 'honor-50',
-		variants: [
-			{
-				color: '#0000FF',
-				color_name: 'Azul',
-				id: 'k1l2m3n4-fe26-4e08-9a1b-26a49dh12i21',
-				price: 599.99,
-				stock: 10,
-				storage: '256GB',
-			},
-		],
-	},
-	{
-		brand: 'Realme',
-		colors: [{ color: '#FFA500', color_name: 'Naranja' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['6GB RAM', 'Snapdragon 870', 'Cámara 64MP'],
-		id: 'c9f7e6d8-7c5d-4e8b-a9f0-b3d88b987abc',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Realme GT',
-		price: 499.99,
-		slug: 'realme-gt',
-		variants: [
-			{
-				color: '#FFA500',
-				color_name: 'Naranja',
-				id: 'j8k9l0m1-fe26-4e08-9j8i-25a38gf12k20',
-				price: 499.99,
-				stock: 10,
-				storage: '128GB',
-			},
-		],
-	},
-	{
-		brand: 'Huawei',
-		colors: [{ color: '#800080', color_name: 'Púrpura' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['128GB RAM', 'Pantalla OLED', 'Carga rápida'],
-		id: 'f8c3b4a9-4d3a-4f6b-a8d1-b3c78c123cde',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Huawei P40 Pro',
-		price: 799.99,
-		slug: 'huawei-p40-pro',
-		variants: [
-			{
-				color: '#800080',
-				color_name: 'Púrpura',
-				id: 'i1j2k3l4-fe26-4e08-9g5f-27a50gj13m22',
-				price: 799.99,
-				stock: 8,
-				storage: '256GB',
-			},
-		],
-	},
-	{
-		brand: 'Apple',
-		colors: [{ color: '#FFFFFF', color_name: 'Blanco' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['128GB Storage', 'Face ID', 'Cámara frontal de 12MP'],
-		id: '1b3c2de7-3a10-4e9b-b8e7-b5c8a1234560',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'iPhone 13',
-		price: 999.99,
-		slug: 'iphone-13',
-		variants: [
-			{
-				color: '#FFFFFF',
-				color_name: 'Blanco',
-				id: 'a3f1a5b7-fe26-4e08-8b7e-16a45cd43f11',
-				price: 999.99,
-				stock: 5,
-				storage: '128GB',
-			},
-		],
-	},
-	{
-		brand: 'Samsung',
-		colors: [{ color: '#FF0000', color_name: 'Rojo' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['6GB RAM', 'Pantalla Super AMOLED', 'Cámara 64MP'],
-		id: 'f1e2d3b4-7a5c-4f5b-b9e1-a3d18c321bcd',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Samsung Galaxy A72',
-		price: 699.99,
-		slug: 'samsung-galaxy-a72',
-		variants: [
-			{
-				color: '#FF0000',
-				color_name: 'Rojo',
-				id: 'l2m3n4o5-fe26-4e08-9a2b-28a61dh14k23',
-				price: 699.99,
-				stock: 12,
-				storage: '256GB',
-			},
-		],
-	},
-	{
-		brand: 'Xiaomi',
-		colors: [{ color: '#00FF00', color_name: 'Verde' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['8GB RAM', 'Batería 5000mAh', 'Pantalla 90Hz'],
-		id: 'e5a1d2be-5b60-4f3e-b8d1-a3c98c123abc',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Xiaomi Redmi Note 10',
-		price: 299.99,
-		slug: 'xiaomi-redmi-note-10',
-		variants: [
-			{
-				color: '#00FF00',
-				color_name: 'Verde',
-				id: 'k4l5m6n7-fe26-4e08-9c2d-29a72ef15l24',
-				price: 299.99,
-				stock: 15,
-				storage: '128GB',
-			},
-		],
-	},
-];
+export const allFajas = [
+  // Fajas - Post-Quirúrgica
+  {
+    id: "faja-001",
+    name: "Faja Alta Compresión",
+    slug: "faja-alta-compresion",
+    category: "Fajas",
+    line: "Post-Quirúrgica",
+    features: ["Alta compresión", "Cierre frontal", "Material suave"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [{ type: "text", text: "Ideal para postoperatorios." }],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-faja.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-006",
+        price: 110.0,
+        stock: 12,
+        size: "M",
+        color: { name: "Beige", hex_code: "#F5F5DC" },
+      },
+    ],
+  },
 
-export const recentCelulares = [
-	{
-		brand: 'Samsung',
-		colors: [{ color: '#000000', color_name: 'Negro' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['8GB RAM', 'Dual SIM', 'Cámara trasera de 48MP'],
-		id: '4f53b2ea-2a40-4ec7-a6d0-b7c95888ff',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Samsung A55 5G',
-		price: 449.99,
-		slug: 'samsung-a55-5g',
-		variants: [
-			{
-				color: '#000000',
-				color_name: 'Negro',
-				id: 'a4e814b7-fe26-4e08-8a6f-13a39da43e52',
-				price: 449.99,
-				stock: 10,
-				storage: '256GB',
-			},
-		],
-	},
-	{
-		brand: 'Apple',
-		colors: [{ color: '#FFFFFF', color_name: 'Blanco' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['128GB Storage', 'Face ID', 'Cámara frontal de 12MP'],
-		id: '1b3c2de7-3a10-4e9b-b8e7-b5c8a1234167',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'iPhone 13',
-		price: 999.99,
-		slug: 'iphone-13',
-		variants: [
-			{
-				color: '#FFFFFF',
-				color_name: 'Blanco',
-				id: 'a3f1a5b7-fe26-4e08-8b7e-16a45cd43f11',
-				price: 999.99,
-				stock: 5,
-				storage: '128GB',
-			},
-		],
-	},
-	{
-		brand: 'Xiaomi',
-		colors: [{ color: '#FF0000', color_name: 'Rojo' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['6GB RAM', 'Batería 5000mAh', 'Pantalla 90Hz'],
-		id: 'e5a1d2be-5b60-4f3e-b8d1-a3c98c123abe',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Xiaomi Redmi Note 10',
-		price: 299.99,
-		slug: 'xiaomi-redmi-note-10',
-		variants: [
-			{
-				color: '#FF0000',
-				color_name: 'Rojo',
-				id: 'b2c3d4f5-fe26-4e08-8e0f-17a58bd43c12',
-				price: 299.99,
-				stock: 15,
-				storage: '128GB',
-			},
-		],
-	},
-	{
-		brand: 'Huawei',
-		colors: [{ color: '#0000FF', color_name: 'Azul' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['128GB RAM', 'Pantalla OLED', 'Carga rápida'],
-		id: 'f8c3b4a9-4d3a-4f6b-a8d1-b3c78c12wcde',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Huawei P40 Pro',
-		price: 799.99,
-		slug: 'huawei-p40-pro',
-		variants: [
-			{
-				color: '#0000FF',
-				color_name: 'Azul',
-				id: 'c1d2e3f4-fe26-4e08-8f1e-18a69bd45d13',
-				price: 799.99,
-				stock: 8,
-				storage: '256GB',
-			},
-		],
-	},
-];
+  // Fajas - Romantic
+  {
+    id: "faja-002",
+    name: "Faja Estilo Romantic",
+    slug: "faja-estilo-romantic",
+    category: "Fajas",
+    line: "Romantic",
+    features: ["Diseño elegante", "Tirantes ajustables", "Control de abdomen"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Faja ideal para ocasiones especiales." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-faja.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-007",
+        price: 135.0,
+        stock: 8,
+        size: "S",
+        color: { name: "Rojo", hex_code: "#FF0000" },
+      },
+    ],
+  },
 
-export const popularCelulares = [
-	{
-		brand: 'Huawei',
-		colors: [{ color: '#800080', color_name: 'Púrpura' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['128GB RAM', 'Pantalla OLED', 'Carga rápida'],
-		id: 'f8c3b4a9-4d3a-4f6b-a8d1-b3c78c12fcde',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Huawei P40 Pro',
-		price: 799.99,
-		slug: 'huawei-p40-pro',
-		variants: [
-			{
-				color: '#800080',
-				color_name: 'Púrpura',
-				id: 'i1j2k3l4-fe26-4e08-9g5f-27a50gj13m22',
-				price: 799.99,
-				stock: 8,
-				storage: '256GB',
-			},
-		],
-	},
-	{
-		brand: 'Apple',
-		colors: [{ color: '#FFFFFF', color_name: 'Blanco' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['128GB Storage', 'Face ID', 'Cámara frontal de 12MP'],
-		id: '1b3c2de7-3a10-4e9b-b8e7-b5c8a1234567',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'iPhone 13',
-		price: 999.99,
-		slug: 'iphone-13',
-		variants: [
-			{
-				color: '#FFFFFF',
-				color_name: 'Blanco',
-				id: 'a3f1a5b7-fe26-4e08-8b7e-16a45cd43f11',
-				price: 999.99,
-				stock: 5,
-				storage: '128GB',
-			},
-		],
-	},
-	{
-		brand: 'Samsung',
-		colors: [{ color: '#FF0000', color_name: 'Rojo' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['6GB RAM', 'Pantalla Super AMOLED', 'Cámara 64MP'],
-		id: 'f1e2d3b4-7a5c-4f5b-b9e1-a3d18c321bcd',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Samsung Galaxy A72',
-		price: 699.99,
-		slug: 'samsung-galaxy-a72',
-		variants: [
-			{
-				color: '#FF0000',
-				color_name: 'Rojo',
-				id: 'l2m3n4o5-fe26-4e08-9a2b-28a61dh14k23',
-				price: 699.99,
-				stock: 12,
-				storage: '256GB',
-			},
-		],
-	},
-	{
-		brand: 'Xiaomi',
-		colors: [{ color: '#00FF00', color_name: 'Verde' }],
-		created_at: new Date().toISOString(),
-		description: {
-			type: 'doc',
-			content: [
-				{
-					type: 'paragraph',
-					content: [
-						{
-							type: 'text',
-							text: 'Descripción de prueba',
-						},
-					],
-				},
-			],
-		},
-		features: ['8GB RAM', 'Batería 5000mAh', 'Pantalla 90Hz'],
-		id: 'e5a1d2be-5b60-4f3e-b8d1-a3c98c123abf',
-		images: ['https://ui.shadcn.com/placeholder.svg'],
-		name: 'Xiaomi Redmi Note 10',
-		price: 299.99,
-		slug: 'xiaomi-redmi-note-10',
-		variants: [
-			{
-				color: '#00FF00',
-				color_name: 'Verde',
-				id: 'k4l5m6n7-fe26-4e08-9c2d-29a72ef15l24',
-				price: 299.99,
-				stock: 15,
-				storage: '128GB',
-			},
-		],
-	},
+  // Fajas - Power Net
+  {
+    id: "faja-003",
+    name: "Faja Moldeadora Power Net",
+    slug: "faja-moldeadora-power-net",
+    category: "Fajas",
+    line: "Power Net",
+    features: ["Secado rápido", "Alta elasticidad", "Moldea cintura"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [{ type: "text", text: "Perfecta para uso diario." }],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-faja.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-008",
+        price: 100.0,
+        stock: 9,
+        size: "L",
+        color: { name: "Negro", hex_code: "#000000" },
+      },
+    ],
+  },
+
+  // Fajas - Smart Fresh
+  {
+    id: "faja-004",
+    name: "Faja Smart Fresh",
+    slug: "faja-smart-fresh",
+    category: "Fajas",
+    line: "Smart Fresh",
+    features: ["Material fresco", "Diseño ergonómico", "Antibacterial"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [{ type: "text", text: "Ideal para climas cálidos." }],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-faja.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-009",
+        price: 125.0,
+        stock: 7,
+        size: "M",
+        color: { name: "Blanco", hex_code: "#FFFFFF" },
+      },
+    ],
+  },
+
+  // Complementos
+  {
+    id: "comp-001",
+    name: "Tabla Coxis",
+    slug: "tabla-coxis",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Postoperatorio", "Comodidad al sentarse", "Fácil de limpiar"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Ideal para proteger la zona del coxis." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-010",
+        price: 35.0,
+        stock: 20,
+        size: "Única",
+        color: { name: "Gris", hex_code: "#808080" },
+      },
+    ],
+  },
+
+  {
+    id: "comp-002",
+    name: "Tabla Lumbar",
+    slug: "tabla-lumbar",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Soporte lumbar", "Previene deformidades", "Material anatómico"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Soporte para la parte baja de la espalda." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-011",
+        price: 40.0,
+        stock: 18,
+        size: "Única",
+        color: { name: "Beige", hex_code: "#F5F5DC" },
+      },
+    ],
+  },
+
+  {
+    id: "comp-003",
+    name: "Espuma Antifibrosis",
+    slug: "espuma-antifibrosis",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Reduce fibrosis", "Ultrasuave", "Ideal para abdomen"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Ayuda a evitar fibrosis postoperatoria." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-012",
+        price: 30.0,
+        stock: 25,
+        size: "Única",
+        color: { name: "Rosa", hex_code: "#FFC0CB" },
+      },
+    ],
+  },
+
+  {
+    id: "comp-004",
+    name: "Cojín Postoperatorio",
+    slug: "cojin-post",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Confort", "Material ergonómico", "Diseño discreto"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "Diseñado para mayor comodidad postcirugía.",
+            },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-013",
+        price: 60.0,
+        stock: 10,
+        size: "Única",
+        color: { name: "Negro", hex_code: "#000000" },
+      },
+    ],
+  },
+
+  {
+    id: "comp-005",
+    name: "Tabla Ocho",
+    slug: "tabla-ocho",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Soporte completo", "Diseño en 8", "Alta adaptabilidad"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Para una presión uniforme en el abdomen." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-014",
+        price: 45.0,
+        stock: 14,
+        size: "Única",
+        color: { name: "Beige", hex_code: "#F5F5DC" },
+      },
+    ],
+  },
+
+  {
+    id: "comp-006",
+    name: "Papel Osmótico",
+    slug: "papel-osmotico",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Efecto sauna", "Elimina toxinas", "Fácil de aplicar"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Perfecto para tratamientos reductores." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-015",
+        price: 20.0,
+        stock: 50,
+        size: "Única",
+        color: { name: "Transparente", hex_code: "#D3D3D3" },
+      },
+    ],
+  },
+
+  {
+    id: "comp-007",
+    name: "Aceite de Naranja",
+    slug: "aceite-naranja",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Reductor", "Anticelulitis", "Aroma agradable"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "Aceite esencial para masajes postoperatorios.",
+            },
+          ],
+        },
+      ],
+    },
+    images: ["https://media.falabella.com/falabellaCO/133012451_01/w=800,h=800,fit=pad"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-016",
+        price: 25.0,
+        stock: 40,
+        size: "120ml",
+        color: { name: "Naranja", hex_code: "#FFA500" },
+      },
+    ],
+  },
 ];
