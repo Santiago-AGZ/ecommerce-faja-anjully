@@ -5,8 +5,10 @@ import { prepareProducts } from "../helpers";
 import { ContainerFilter } from "../components/products/ContainerFilter";
 import { CardProduct } from "../components/products/CardProduct";
 import { PreparedProduct } from "../interfaces";
+import { Pagination } from "@/components/shared/Pagination";
 
 export const ProductsPage = () => {
+  const [page, setPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedLines, setSelectedLines] = useState<string[]>([]);
 
@@ -75,6 +77,13 @@ export const ProductsPage = () => {
               </p>
             )}
           </div>
+
+          {/* PAGINACIÓN */}
+          <Pagination
+            totalItems={filteredProducts.length}
+            page={page}
+            setPage={setPage}
+          />
         </div>
       </div>
     </>

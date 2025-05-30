@@ -60,3 +60,38 @@ export const getFillteredProducts = async ({
 
   return { data, count };
 };
+
+//metodo para obtener productos recientes
+export const getRecentProducts = async () => {
+  const { data: products, error } = await supabase
+    .from("products")
+    .select("*,variants (*)")
+    .order("created_at", { ascending: false })
+    .limit(4);
+
+  if (error) {
+    console.error("Error fetching recent products:", error.message);
+  }
+
+  return products;
+};
+
+//metodo para obtener productos aleatorios
+export const getRandomProducts = async () => {
+  const { data: products, error } = await supabase
+    .from("products")
+    .select("*,variants (*)")
+    .order("created_at", { ascending: false })
+    .limit(20)
+
+  if (error) {
+    console.error("Error fetching random products:", error.message);
+  }
+
+
+  //seleccionar 4 productos aleatorios
+
+
+  const randomProdcts = (products || []).sort(() => Math.random() - 0.5).slice(0, 4);
+  return randomProdcts;
+};
