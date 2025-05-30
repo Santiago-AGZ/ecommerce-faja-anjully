@@ -1,5 +1,3 @@
-import { set } from "react-hook-form";
-
 interface Props {
   totalItems: number;
   page: number;
