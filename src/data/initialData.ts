@@ -332,7 +332,9 @@ export const allFajas = [
         },
       ],
     },
-    images: ["https://media.falabella.com/falabellaCO/133012451_01/w=800,h=800,fit=pad"],
+    images: [
+      "https://media.falabella.com/falabellaCO/133012451_01/w=800,h=800,fit=pad",
+    ],
     created_at: new Date().toISOString(),
     variants: [
       {
@@ -341,6 +343,142 @@ export const allFajas = [
         stock: 40,
         size: "120ml",
         color: { name: "Naranja", hex_code: "#FFA500" },
+      },
+    ],
+  },
+  {
+    id: "comp-008",
+    name: "Faja de Compresión",
+    slug: "faja-compresion",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: [
+      "Compresión ajustable",
+      "Material transpirable",
+      "Diseño anatómico",
+    ],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Faja para mayor soporte postquirúrgico." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-017",
+        price: 70.0,
+        stock: 15,
+        size: "L",
+        color: { name: "Negro", hex_code: "#000000" },
+      },
+    ],
+  },
+];
+
+export const popupularProducts = [
+  {
+    id: "comp-007",
+    name: "Aceite de Naranja",
+    slug: "aceite-naranja",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Reductor", "Anticelulitis", "Aroma agradable"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "Aceite esencial para masajes postoperatorios.",
+            },
+          ],
+        },
+      ],
+    },
+    images: [
+      "https://media.falabella.com/falabellaCO/133012451_01/w=800,h=800,fit=pad",
+    ],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-016",
+        price: 25.0,
+        stock: 40,
+        size: "120ml",
+        color: { name: "Naranja", hex_code: "#FFA500" },
+      },
+    ],
+  },
+  {
+    id: "comp-008",
+    name: "Faja de Compresión",
+    slug: "faja-compresion",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: [
+      "Compresión ajustable",
+      "Material transpirable",
+      "Diseño anatómico",
+    ],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Faja para mayor soporte postquirúrgico." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-017",
+        price: 70.0,
+        stock: 15,
+        size: "L",
+        color: { name: "Negro", hex_code: "#000000" },
+      },
+    ],
+  },
+  {
+    id: "comp-005",
+    name: "Tabla Ocho",
+    slug: "tabla-ocho",
+    category: "Complementos",
+    line: "Post-Quirúrgica",
+    features: ["Soporte completo", "Diseño en 8", "Alta adaptabilidad"],
+    description: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            { type: "text", text: "Para una presión uniforme en el abdomen." },
+          ],
+        },
+      ],
+    },
+    images: ["https://ui.shadcn.com/placeholder-complemento.svg"],
+    created_at: new Date().toISOString(),
+    variants: [
+      {
+        id: "var-014",
+        price: 45.0,
+        stock: 14,
+        size: "Única",
+        color: { name: "Beige", hex_code: "#F5F5DC" },
       },
     ],
   },
