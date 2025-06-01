@@ -6,6 +6,7 @@ import { ContainerFilter } from "../components/products/ContainerFilter";
 import { CardProduct } from "../components/products/CardProduct";
 import { PreparedProduct } from "../interfaces";
 import { Pagination } from "@/components/shared/Pagination";
+// import { useCounterStore } from "@/store/counter.store";
 
 export const ProductsPage = () => {
   const [page, setPage] = useState(1);
@@ -28,6 +29,11 @@ export const ProductsPage = () => {
     ) {
       return true;
     }
+
+    // const count = useCounterStore(state => state.count);
+    // const increment = useCounterStore(state => state.increment);
+    // const decrement = useCounterStore(state => state.decrement);
+
 
     // Si seleccionó Fajas y es faja
     if (selectedCategories.includes("Fajas") && categoryName === "Fajas") {
