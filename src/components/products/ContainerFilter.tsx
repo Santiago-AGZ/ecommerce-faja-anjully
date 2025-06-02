@@ -4,7 +4,7 @@ import { Separator } from "../shared/Separator";
 const availableLines = [
   "Romantic",
   "Power-Net",
-  "Smarth-Fresh",
+  "Smart-Fresh",
   "Post-Quirurgica",
   "Complementos",
 ];
