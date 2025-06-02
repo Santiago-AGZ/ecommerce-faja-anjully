@@ -18,11 +18,13 @@ export const getProducts = async () => {
 export const getFilteredProducts = async ({
 	page = 1,
 	lines = [],
+	limit = 12, // Nuevo parámetro con valor por defecto
 }: {
 	page: number;
 	lines: string[];
+	limit?: number;
 }) => {
-	const itemsPerPage = 10;
+	const itemsPerPage = limit; // Usar el parámetro recibido
 	const from = (page - 1) * itemsPerPage;
 	const to = from + itemsPerPage - 1;
 

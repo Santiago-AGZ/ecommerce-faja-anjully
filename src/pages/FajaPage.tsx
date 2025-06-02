@@ -140,7 +140,7 @@ export const FajaPage = () => {
 					</ul>
 
 					<div className='flex flex-col gap-3'>
-						<p>
+						<p className='text-xm font-medium'>
 							Color: {selectedColor && colors[selectedColor].name}
 						</p>
 						<div className='flex gap-3'>
@@ -149,13 +149,14 @@ export const FajaPage = () => {
 									key={color}
 									className={`w-8 h-8 rounded-full flex justify-center items-center ${
 										selectedColor === color
-											? 'border border-slate-800'
-											: ''
+											? 'border-2 border-slate-800'
+											: 'border border-gray-200'
 									}`}
 									onClick={() => setSelectedColor(color)}
+									style={{ padding: 0 }}
 								>
 									<span
-										className='w-[26px] h-[26px] rounded-full'
+										className='w-6 h-6 rounded-full border border-gray-300'
 										style={{ backgroundColor: color }}
 									/>
 								</button>
@@ -163,10 +164,10 @@ export const FajaPage = () => {
 						</div>
 					</div>
 
-					{/* OPCIONES DE ALMACENAMIENTO */}
+					{/* OPCIONES DE talla */}
 					<div className='flex flex-col gap-3'>
-						<p className='text-xs font-medium'>
-							Almacenamiento disponible
+						<p className='text-sm font-medium'>
+							Tallas Disponibles:
 						</p>
 
 						{selectedColor && (

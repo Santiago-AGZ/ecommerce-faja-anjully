@@ -13,13 +13,13 @@ export const Pagination = ({ totalItems, page, setPage }: Props) => {
 		setPage(prevPage => Math.max(prevPage - 1, 1));
 	};
 
-	const itemsPerPage = 10;
+	const itemsPerPage = 12; // Cambiado de 10 a 12
 	const totalPages = totalItems
 		? Math.ceil(totalItems / itemsPerPage)
 		: 1;
 	const isLastPage = page >= totalPages;
 
-	const startItem = (page - 1) * itemsPerPage + 1; // 1 -> 11 -> 21
+	const startItem = (page - 1) * itemsPerPage + 1;
 	const endItem = Math.min(page * itemsPerPage, totalItems);
 
 	return (
@@ -32,9 +32,9 @@ export const Pagination = ({ totalItems, page, setPage }: Props) => {
 				de <span className='font-bold'> {totalItems}</span> productos
 			</p>
 
-			<div className='flex gap-3'>
+			<div className='flex justify-between gap-4'>
 				<button
-					className='btn-paginated'
+					className='btn-paginated border border-black px-7	 py-2 rounded hover:bg-black hover:text-white transition active:scale-95'
 					onClick={handlePrevPage}
 					disabled={page === 1}
 				>
@@ -42,7 +42,7 @@ export const Pagination = ({ totalItems, page, setPage }: Props) => {
 				</button>
 
 				<button
-					className='btn-paginated'
+					className='btn-paginated border border-black px-7 py-2 rounded hover:bg-black hover:text-white transition active:scale-95'
 					onClick={handleNextPage}
 					disabled={isLastPage}
 				>

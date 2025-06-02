@@ -13,7 +13,7 @@ export const RootLayout = () => {
 
 			{pathname === '/' && <Banner />}
 
-			<main className="w-full my-8 flex-1 flex flex-col items-center justify-center">
+			<main className="w-full my-8 flex flex-col  px-10">
 				<Outlet />
 			</main>
 
