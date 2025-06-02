@@ -43,10 +43,8 @@ export type Database = {
           created_at: string
           customer_id: string | null
           id: string
-          is_primary: boolean
-          postal_code: string
+          postal_code: string | null
           state: string
-          updated_at: string | null
         }
         Insert: {
           address_line1: string
@@ -56,10 +54,8 @@ export type Database = {
           created_at?: string
           customer_id?: string | null
           id?: string
-          is_primary?: boolean
-          postal_code: string
+          postal_code?: string | null
           state: string
-          updated_at?: string | null
         }
         Update: {
           address_line1?: string
@@ -69,10 +65,8 @@ export type Database = {
           created_at?: string
           customer_id?: string | null
           id?: string
-          is_primary?: boolean
-          postal_code?: string
+          postal_code?: string | null
           state?: string
-          updated_at?: string | null
         }
         Relationships: [
           {
@@ -90,7 +84,7 @@ export type Database = {
           email: string
           full_name: string
           id: string
-          phone: string
+          phone: string | null
           user_id: string
         }
         Insert: {
@@ -98,7 +92,7 @@ export type Database = {
           email: string
           full_name: string
           id?: string
-          phone: string
+          phone?: string | null
           user_id: string
         }
         Update: {
@@ -106,7 +100,7 @@ export type Database = {
           email?: string
           full_name?: string
           id?: string
-          phone?: string
+          phone?: string | null
           user_id?: string
         }
         Relationships: []
@@ -159,24 +153,24 @@ export type Database = {
           created_at: string
           customer_id: string
           id: number
-          status: string | null
-          total_amount: number | null
+          status: string
+          total_amount: number
         }
         Insert: {
           address_id: string
           created_at?: string
           customer_id: string
           id?: number
-          status?: string | null
-          total_amount?: number | null
+          status?: string
+          total_amount: number
         }
         Update: {
           address_id?: string
           created_at?: string
           customer_id?: string
           id?: number
-          status?: string | null
-          total_amount?: number | null
+          status?: string
+          total_amount?: number
         }
         Relationships: [
           {

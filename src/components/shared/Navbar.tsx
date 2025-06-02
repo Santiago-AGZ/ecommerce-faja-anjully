@@ -1,53 +1,92 @@
-import { Link, NavLink } from "react-router-dom";
-import { navbarLinks } from "../../constants/links";
-import { MdOutlineSearch, MdOutlineShoppingBag } from "react-icons/md";
-import { FaBarsStaggered } from "react-icons/fa6";
-import { Logo } from "./Logo";
+import { Link, NavLink } from 'react-router-dom';
+import { navbarLinks } from '../../constants/links';
+import {
+	HiOutlineSearch,
+	HiOutlineShoppingBag,
+	HiOutlineUser,
+} from 'react-icons/hi';
+import { FaBarsStaggered } from 'react-icons/fa6';
+import { Logo } from './Logo';
+import { useGlobalStore } from '../../store/global.store';
+import { useCartStore } from '../../store/cart.store';
+import { LuLoader } from 'react-icons/lu';
+import { useUser } from '@/hooks/auth/useUser';
 
-export const Navbar = () => { 
-    return (
-        <header className="bg-[#a06078] text-[#f3c1c0] py-4 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12">
-            <Logo />
-        
-            <nav className="space-x-5 hidden md:flex">
-                {
-                    navbarLinks.map((link) => (
-                        <NavLink
-                            key={link.id}
-                            to={link.href}
-                            className={({ isActive }) => 
-                                `${
-                                    isActive ? "text-[#f4c4c2] underline" : "text-[#f3c1c0]"
-                                } transition-all duration-300 font-medium hover:text-[#f4c4c2]`
-                            }
-                        >
-                            {link.title}
-                        </NavLink>
-                    ))}
-            </nav>
+export const Navbar = () => {
+	const openSheet = useGlobalStore(state => state.openSheet);
 
-            <div className="flex gap-5 items-center">
-                <button className="text-[#f3c1c0] hover:text-[#f4c4c2]">
-                    <MdOutlineSearch size={25} />
-                </button>
-                <div className="relative">
-                    <Link
-                        to="/login"
-                        className="border-2 border-[#f3c1c0] w-9 h-9 rounded-full grid place-items-center text-lg font-bold text-[#f3c1c0] hover:border-[#f4c4c2] hover:text-[#f4c4c2]"
-                    >
-                        R
-                    </Link>
-                </div>
+	const totalItemsInCart = useCartStore(
+		state => state.totalItemsInCart
+	);
 
-                <button className="relative text-[#f3c1c0] hover:text-[#f4c4c2]">
-                    <span className="absolute -bottom-2 -right-2 w-4 h-5 grid place-items-center bg-[#f4c4c2] text-[#a06078] text-xs rounded-full">0</span>
-                    <MdOutlineShoppingBag size={25} />
-                </button>
-            </div>
+	const setActiveNavMobile = useGlobalStore(
+		state => state.setActiveNavMobile
+	);
 
-            <button className="md:hidden text-[#f3c1c0] hover:text-[#f4c4c2]">
-                <FaBarsStaggered size={25} />
-            </button>
-        </header>
-    );
+	const { session, isLoading } = useUser();
+
+	const userId = session?.user.id;
+
+	return (
+		<header className='bg-[#c4879b] text-[#fbeaea] py-4 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12'>
+			<Logo />
+
+			<nav className='space-x-5 hidden md:flex'>
+				{navbarLinks.map(link => (
+					<NavLink
+						key={link.id}
+						to={link.href}
+						className={({ isActive }) =>
+							`${
+								isActive ? "text-[#6d3843]  underline" : "text-[#fbeaea]"
+                                } transition-all duration-300 font-medium hover:text-[#6d3843]`
+						}
+					>
+						{link.title}
+					</NavLink>
+				))}
+			</nav>
+
+			<div className='flex gap-5 items-center'>
+				<button onClick={() => openSheet('search')}>
+					<HiOutlineSearch size={25} />
+				</button>
+
+				{isLoading ? (
+					<LuLoader className='animate-spin' size={60} />
+				) : session ? (
+					<div className='relative'>
+						{/* User Nav */}
+						<Link
+							to='/account'
+							className='border-2 border-slate-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold'
+						>
+							R
+						</Link>
+					</div>
+				) : (
+					<Link to='/login'>
+						<HiOutlineUser size={25} />
+					</Link>
+				)}
+
+				<button
+					className='relative'
+					onClick={() => openSheet('cart')}
+				>
+					<span className='absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full'>
+						{totalItemsInCart}
+					</span>
+					<HiOutlineShoppingBag size={25} />
+				</button>
+			</div>
+
+			<button
+				className='md:hidden'
+				onClick={() => setActiveNavMobile(true)}
+			>
+				<FaBarsStaggered size={25} />
+			</button>
+		</header>
+	);
 };
