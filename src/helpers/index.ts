@@ -1,66 +1,55 @@
-// index.ts
+import { Color, Product, VariantProduct } from '../interfaces';
 
-import { PreparedProduct, Product } from "@/interfaces";
-
-
-// Función para formatear el precio a COP (Peso colombiano)
-export const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat('es-CO', {
-    style: 'currency',
-    currency: 'COP',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(price);
+// Función para formatear el precio a pesos colombianos
+export const formatPrice = (price: number) => {
+	return new Intl.NumberFormat('es-CO', {
+		style: 'currency',
+		currency: 'COP',
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 0,
+	}).format(price);
 };
 
-// Función para preparar los productos
-export const prepareProducts = (products: Product[]): PreparedProduct[] => {
-  return products.map(product => {
-    // Agrupar las variantes por color y obtener el precio mínimo por color
-    const colors = product.variants.reduce<
-      {
-        name: string;
-        color: string;
-        price: number;
-      }[]
-    >((acc, variant) => {
-      // Buscamos si ya existe el color en acc
-      const existing = acc.find(item => item.color === variant.color.hex_code);
 
-      if (existing) {
-        // Si existe, actualizamos el precio mínimo
-        if (variant.price < existing.price) {
-          existing.price = variant.price;
-        }
-      } else {
-        // Si no existe, agregamos el color con el precio
-        acc.push({
-          name: variant.color.name,
-          color: variant.color.hex_code,
-          price: variant.price,
-        });
-      }
+// Función para preparar los productos - (CELULARES)
+export const prepareProducts = (products: Product[]) => {
+	return products.map(product => {
+		// Agrupar las variantes por color
+		const colors = product.variants.reduce(
+			(acc: Color[], variant: VariantProduct) => {
+				const existingColor = acc.find(
+					item => item.color === variant.color
+				);
 
-      return acc;
-    }, []);
+				if (existingColor) {
+					// Si ya existe el color, comparamos los precios
+					existingColor.price = Math.min(
+						existingColor.price,
+						variant.price
+					);
+				} // Mantenemos el precio mínimo
+				else {
+					acc.push({
+						color: variant.color,
+						price: variant.price,
+						name: variant.color_name,
+					});
+				}
 
-    // Obtener el precio más bajo de todas las variantes (precios mínimos por color)
-    const price = Math.min(...colors.map(c => c.price));
+				return acc;
+			},
+			[]
+		);
 
-    return {
-      id: product.id,
-      name: product.name,
-      slug: product.slug,
-      features: product.features,
-      description: product.description,
-      images: product.images,
-      created_at: product.created_at,
-      price,
-      colors: colors.map(({ name, color }) => ({ name, color })),
-      variants: product.variants,
-      // Puedes agregar category y line si los tienes disponibles
-      category: product.category,
-      line: product.line,
-    };
-  });
+		// Obtener el precio más bajo de las variantes agrupadas
+		const price = Math.min(...colors.map(item => item.price));
+
+		// Devolver el producto formateado
+		return {
+			...product,
+			price,
+			colors: colors.map(({ name, color }) => ({ name, color })),
+			variants: product.variants,
+		};
+	});
 };

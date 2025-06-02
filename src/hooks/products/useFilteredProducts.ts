@@ -1,21 +1,23 @@
-import { getFillteredProducts } from "@/components/actions";
-import { useQuery } from "@tanstack/react-query";
+import { getFilteredProducts } from '@/components/actions';
+import { useQuery } from '@tanstack/react-query';
+
 
 export const useFilteredProducts = ({
-  page,
-  categories,
+	page,
+	lines,
 }: {
-  page: number;
-  categories: string[];
+	page: number;
+	lines: string[];
 }) => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["filteredProducts", page, categories],
-    queryFn: () => getFillteredProducts({ page, categories }),
-    retry: false,
-  });
-  return {
-    data: data?.data,
-    isLoading,
-    totalProducts: data?.count?? 0,
-  };
+	const { data, isLoading } = useQuery({
+		queryKey: ['filteredProducts', page, lines],
+		queryFn: () => getFilteredProducts({ page, lines }),
+		retry: false,
+	});
+
+	return {
+		data: data?.data,
+		isLoading,
+		totalProducts: data?.count ?? 0,
+	};
 };

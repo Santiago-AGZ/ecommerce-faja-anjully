@@ -1,97 +1,96 @@
 import { supabase } from "@/supabase/client";
 
-export const getproducts = async () => {
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*,variants (*)")
-    .order("created_at", { ascending: false });
 
-  if (error) {
-    console.error("Error fetching products:", error.message);
-  }
+export const getProducts = async () => {
+	const { data: products, error } = await supabase
+		.from('products')
+		.select('*, variants(*)')
+		.order('created_at', { ascending: false });
 
-  return { products, error };
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
+
+	return products;
 };
 
-export const getFillteredProducts = async ({
-  page = 1,
-  categories = [],
+export const getFilteredProducts = async ({
+	page = 1,
+	lines = [],
 }: {
-  page: number;
-  categories: string[];
+	page: number;
+	lines: string[];
 }) => {
-  const itemsPerPage = 10;
-  const from = (page - 1) * itemsPerPage;
-  const to = from + itemsPerPage - 1;
+	const itemsPerPage = 10;
+	const from = (page - 1) * itemsPerPage;
+	const to = from + itemsPerPage - 1;
 
-  let query = supabase
-    .from("products")
-    .select("*,variants (*)", { count: "exact" })
-    .order("created_at", { ascending: false })
-    .range(from, to);
+	let query = supabase
+		.from('products')
+		.select('*, variants(*)', { count: 'exact' })
+		.order('created_at', { ascending: false })
+		.range(from, to);
 
-  // 🟡 Si hay nombres de categorías, convertirlos a UUIDs
-  if (categories.length > 0) {
-    const { data: categoriesData, error: catError } = await supabase
-      .from("product_categories")
-      .select("id")
-      .in("name", categories);
+	if (lines.length > 0) {
+		query = query.in('line', lines);
+	}
 
-    if (catError) {
-      console.error("Error fetching category IDs:", catError.message);
-      return { data: [], count: 0 }; // <-- corta aquí si falla
-    }
+	const { data, error, count } = await query;
 
-    const categoryIds = categoriesData?.map((cat) => cat.id) || [];
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
 
-    if (categoryIds.length > 0) {
-      query = query.in("category_id", categoryIds);
-    } else {
-      // No hay categorías válidas, retorna vacío
-      return { data: [], count: 0 };
-    }
-  }
-
-  const { data, error, count } = await query;
-
-  if (error) {
-    console.error("Error fetching filtered products:", error.message);
-  }
-
-  return { data, count };
+	return { data, count };
 };
 
-//metodo para obtener productos recientes
 export const getRecentProducts = async () => {
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*,variants (*)")
-    .order("created_at", { ascending: false })
-    .limit(4);
+	const { data: products, error } = await supabase
+		.from('products')
+		.select('*, variants(*)')
+		.order('created_at', { ascending: false })
+		.limit(4);
 
-  if (error) {
-    console.error("Error fetching recent products:", error.message);
-  }
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
 
-  return products;
+	return products;
 };
 
-//metodo para obtener productos aleatorios
 export const getRandomProducts = async () => {
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*,variants (*)")
-    .order("created_at", { ascending: false })
-    .limit(20)
+	const { data: products, error } = await supabase
+		.from('products')
+		.select('*, variants(*)')
+		.limit(20);
 
-  if (error) {
-    console.error("Error fetching random products:", error.message);
-  }
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
 
+	// Seleccionar 4 productos al azar
+	const randomProducts = products
+		.sort(() => 0.5 - Math.random())
+		.slice(0, 4);
 
-  //seleccionar 4 productos aleatorios
+	return randomProducts;
+};
 
+export const getProductBySlug = async (slug: string) => {
+	const { data, error } = await supabase
+		.from('products')
+		.select('*, variants(*)')
+		.eq('slug', slug)
+		.single();
 
-  const randomProdcts = (products || []).sort(() => Math.random() - 0.5).slice(0, 4);
-  return randomProdcts;
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
+
+	return data;
 };
