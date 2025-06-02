@@ -1,25 +1,19 @@
-// interfaces.ts
+
+import { Json } from '../supabase/supabase';
+
 export interface Color {
-  name: string;
-  hex_code: string;
+	name: string;
+	color: string;
+	price: number;
 }
 
-export interface Variant {
-  id: string;
+export interface VariantProduct {
+	id: string; 
   stock: number;
   price: number;
-  color: Color;
+  color: string;
+  color_name: string;
   size: string;
-}
-
-export interface ProductCategory {
-  id: string;
-  name: string;
-}
-
-export interface ProductLine {
-  id: string;
-  name: string;
 }
 
 export interface Product {
@@ -29,18 +23,19 @@ export interface Product {
   category: string;
   line: string;
   features: string[];
-  description: any;
+  description: Json;
+  compression_level: string;
   images: string[];
   created_at: string;
-  variants: Variant[];
+  variants: VariantProduct[];
 }
 
-export interface PreparedProduct {
-  id: string;
+export interface PreparedProducts {
+	id: string;
   name: string;
   slug: string;
   features: string[];
-  description: any;
+  description: Json;
   images: string[];
   created_at: string;
   price: number;
@@ -48,7 +43,8 @@ export interface PreparedProduct {
     name: string;
     color: string;
   }[];
-  variants: Variant[];
+  variants: VariantProduct[];
   category?: string;
   line?: string;
+  
 }

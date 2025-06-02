@@ -84,45 +84,6 @@ export type Database = {
           },
         ]
       }
-      colors: {
-        Row: {
-          hex_code: string | null
-          id: string
-          name: string
-        }
-        Insert: {
-          hex_code?: string | null
-          id?: string
-          name: string
-        }
-        Update: {
-          hex_code?: string | null
-          id?: string
-          name?: string
-        }
-        Relationships: []
-      }
-      compression_levels: {
-        Row: {
-          created_at: string | null
-          description: string | null
-          id: string
-          level_name: string
-        }
-        Insert: {
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          level_name: string
-        }
-        Update: {
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          level_name?: string
-        }
-        Relationships: []
-      }
       customers: {
         Row: {
           created_at: string
@@ -234,142 +195,42 @@ export type Database = {
           },
         ]
       }
-      product_categories: {
-        Row: {
-          id: string
-          name: string
-        }
-        Insert: {
-          id?: string
-          name: string
-        }
-        Update: {
-          id?: string
-          name?: string
-        }
-        Relationships: []
-      }
-      product_lines: {
-        Row: {
-          active: boolean | null
-          created_at: string | null
-          description: string | null
-          id: string
-          name: string
-        }
-        Insert: {
-          active?: boolean | null
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          name: string
-        }
-        Update: {
-          active?: boolean | null
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          name?: string
-        }
-        Relationships: []
-      }
       products: {
         Row: {
-          active: boolean | null
-          category_id: string | null
-          compression_level_id: string | null
-          created_at: string | null
-          description: Json | null
-          features: string[] | null
+          category: string
+          compression_level: string
+          created_at: string
+          description: Json
+          features: string[]
           id: string
-          images: string[] | null
-          line_id: string | null
+          images: string[]
+          line: string
           name: string
-          ref_code: string | null
           slug: string
         }
         Insert: {
-          active?: boolean | null
-          category_id?: string | null
-          compression_level_id?: string | null
-          created_at?: string | null
-          description?: Json | null
-          features?: string[] | null
+          category: string
+          compression_level: string
+          created_at?: string
+          description: Json
+          features: string[]
           id?: string
-          images?: string[] | null
-          line_id?: string | null
+          images: string[]
+          line: string
           name: string
-          ref_code?: string | null
           slug: string
         }
         Update: {
-          active?: boolean | null
-          category_id?: string | null
-          compression_level_id?: string | null
-          created_at?: string | null
-          description?: Json | null
-          features?: string[] | null
+          category?: string
+          compression_level?: string
+          created_at?: string
+          description?: Json
+          features?: string[]
           id?: string
-          images?: string[] | null
-          line_id?: string | null
+          images?: string[]
+          line?: string
           name?: string
-          ref_code?: string | null
           slug?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "products_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "product_categories"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "products_compression_level_id_fkey"
-            columns: ["compression_level_id"]
-            isOneToOne: false
-            referencedRelation: "compression_levels"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "products_line_id_fkey"
-            columns: ["line_id"]
-            isOneToOne: false
-            referencedRelation: "product_lines"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      sizes: {
-        Row: {
-          applies_to_model: string | null
-          created_at: string | null
-          display_order: number | null
-          hip_range: string
-          id: string
-          name: string
-          thigh_range: string
-          waist_range: string
-        }
-        Insert: {
-          applies_to_model?: string | null
-          created_at?: string | null
-          display_order?: number | null
-          hip_range: string
-          id?: string
-          name: string
-          thigh_range: string
-          waist_range: string
-        }
-        Update: {
-          applies_to_model?: string | null
-          created_at?: string | null
-          display_order?: number | null
-          hip_range?: string
-          id?: string
-          name?: string
-          thigh_range?: string
-          waist_range?: string
         }
         Relationships: []
       }
@@ -393,52 +254,38 @@ export type Database = {
       }
       variants: {
         Row: {
-          color_id: string
-          created_at: string | null
+          color: string
+          color_name: string
           id: string
           price: number
           product_id: string
-          size_id: string
+          size: string
           stock: number
         }
         Insert: {
-          color_id: string
-          created_at?: string | null
+          color: string
+          color_name: string
           id?: string
           price: number
           product_id: string
-          size_id: string
-          stock?: number
+          size: string
+          stock: number
         }
         Update: {
-          color_id?: string
-          created_at?: string | null
+          color?: string
+          color_name?: string
           id?: string
           price?: number
           product_id?: string
-          size_id?: string
+          size?: string
           stock?: number
         }
         Relationships: [
-          {
-            foreignKeyName: "variants_color_id_fkey"
-            columns: ["color_id"]
-            isOneToOne: false
-            referencedRelation: "colors"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "variants_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
             referencedRelation: "products"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "variants_size_id_fkey"
-            columns: ["size_id"]
-            isOneToOne: false
-            referencedRelation: "sizes"
             referencedColumns: ["id"]
           },
         ]
@@ -448,23 +295,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      recommend_size: {
-        Args: {
-          waist_measurement: number
-          hip_measurement: number
-          thigh_measurement: number
-        }
-        Returns: {
-          applies_to_model: string | null
-          created_at: string | null
-          display_order: number | null
-          hip_range: string
-          id: string
-          name: string
-          thigh_range: string
-          waist_range: string
-        }[]
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
