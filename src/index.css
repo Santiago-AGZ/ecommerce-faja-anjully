@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
+@keyframes sheetIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sheetOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.sheet-in {
+  animation: sheetIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sheet-out {
+  animation: sheetOut 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 @custom-variant dark (&:is(.dark *));
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

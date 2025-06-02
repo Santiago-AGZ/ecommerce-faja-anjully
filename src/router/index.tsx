@@ -1,39 +1,60 @@
-import { createBrowserRouter } from "react-router-dom";
-import { RootLayout } from "../layouts/RootLayout";
-import { AboutPage, FajaPage, HomePage, LoginPage, RegisterPage, ProductsPage } from "../pages";
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { RootLayout } from '../layouts/RootLayout';
+import {
+	HomePage,
+	AboutPage,
+	LoginPage,
+	RegisterPage,
+    FajaPage,
+    ProductsPage,
+} from '../pages';
+
+import { OrdersUserPage } from '@/pages/OrdersUserPage';
+import { ClientLayout } from '@/layouts/ClientLayout';
 
 export const router = createBrowserRouter([
-    { 
-        path: "/", 
-        element: <RootLayout />,
-        children: [
-            {
-                index: true,
-                element: <div> <HomePage/> </div>,
-            },
-            {
-                path: "productos",
-                element: <div><ProductsPage/> </div>,
-                
-            },
-            {
-                path: "productos/:slug",
-                element: <div><FajaPage/> </div>,
-            },
-            {
-                path: "sobre-nosotros",
-                element: <div><AboutPage/></div>,
-            },
-            
-            {
-                path: "login",
-                element: <LoginPage/>,
-            },
-            {
-                path: "register",
-                element:<RegisterPage/>,
-            },
-        ],
-    },
+	{
+		path: '/',
+		element: <RootLayout />,
+		children: [
+			{
+				index: true,
+				element: <HomePage />,
+			},
+			{
+				path: 'productos',
+				element: <ProductsPage/>,
+			},
+			{
+				path: 'productos/:slug',
+				element: <FajaPage />,
+			},
+			{
+				path: 'sobre-nosotros',
+				element: <AboutPage />,
+			},
+			{
+				path: 'login',
+				element: <LoginPage />,
+			},
+			{
+				path: 'registro',
+				element: <RegisterPage />,
+			},
+			{
+				path: 'account',
+				element: <ClientLayout />,
+				children: [
+					{
+						path: '',
+						element: <Navigate to='/account/pedidos' />,
+					},
+					{
+						path: 'pedidos',
+						element: <OrdersUserPage />,
+					},
+				],
+			},
+		],
+	},
 ]);
-
