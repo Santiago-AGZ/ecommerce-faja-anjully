@@ -20,7 +20,7 @@ export const RootLayout = () => {
 
 			{pathname === '/' && <Banner />}
 
-			<main className='container my-8 flex-1 p-10'>
+			<main className='w-full my-8 flex-1 p-10'>
 				<Outlet />
 			</main>
 
