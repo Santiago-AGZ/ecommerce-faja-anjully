@@ -35,12 +35,12 @@ export const CardProduct = ({
 	const stock = selectedVariant?.stock || 0;
 
 	return (
-		<div className='flex flex-col gap-6 relative'>
+		<div className='flex flex-col gap-6 relative p-10 text-base'>
 			<Link
 				to={`/productos/${slug}`}
 				className='flex relative group overflow-hidden '
 			>
-				<div className='flex h-[350px] w-full items-center justify-center py-2 lg:h-[250px]'>
+				<div className='flex h-[460px] w-full items-center justify-center py-4 lg:h-[360px]'>
 					<img
 						src={img}
 						alt={name}
@@ -64,10 +64,10 @@ export const CardProduct = ({
 					{colors.map(color => (
 						<span
 							key={color.color}
-							className={`grid place-items-center w-5 h-5 rounded-full cursor-pointer`}
+							className={`grid place-items-center w-6 h-6 rounded-full cursor-pointer bg-gray-100`}
 						>
 							<span
-								className='w-[14px] h-[14px] rounded-full'
+								className='w-[18px] h-[18px] rounded-full border border-gray-300'
 								style={{
 									backgroundColor: color.color,
 								}}
