@@ -22,7 +22,7 @@ export const CardProduct = ({
 	colors,
 	variants,
 }: Props) => {
-	const [activeColor, setActiveColor] = useState<{
+	const [activeColor] = useState<{
 		name: string;
 		color: string;
 	}>(colors[0]);

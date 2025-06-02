@@ -1,4 +1,3 @@
-import { Brands } from '../components/home/Brands';
 import { FeatureGrid } from '../components/home/FeatureGrid';
 import { ProductGrid } from '../components/home/ProductGrid';
 import { ProductGridSkeleton } from '../components/skeletons/ProductGridSkeleton';
