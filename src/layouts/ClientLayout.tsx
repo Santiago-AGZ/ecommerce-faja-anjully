@@ -8,7 +8,7 @@ import { useUser } from '@/hooks/auth/useUser';
 
 
 export const ClientLayout = () => {
-	const { session, isLoading: isLoadingSession } = useUser();
+	const {  isLoading: isLoadingSession } = useUser();
 
 	const navigate = useNavigate();
 
