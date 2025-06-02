@@ -13,7 +13,7 @@ export const GridImages = ({ images }: Props) => {
 
 	return (
 		<div className='flex-1 flex flex-col gap-3 relative items-center w-full'>
-			<div className='bg-[#f2f2f2] h-[350px] xs:h-[400px] sm:h-[500px] p-4 w-full flex items-center justify-center'>
+			<div className='bg-[#f2f2f2] h-[420px] xs:h-[500px] sm:h-[600px] md:h-[700px] p-1 xs:p-4 w-full flex items-center justify-center mx-auto'>
 				<img
 					src={activeImage}
 					alt='Imagen de Producto'
@@ -22,12 +22,12 @@ export const GridImages = ({ images }: Props) => {
 			</div>
 
 			{/* Miniaturas */}
-			<div className='flex flex-wrap gap-2 mt-4 justify-center w-full'>
+			<div className='flex flex-wrap gap-4 mt-4 justify-center w-full'>
 				{images.map((image, index) => (
 					<button
 						key={index}
 						onClick={() => handleImageClick(image)}
-						className={`w-16 h-16 border ${
+						className={`w-15 h-25 border ${
 							activeImage === image
 								? 'border-black'
 								: 'border-transparent'
