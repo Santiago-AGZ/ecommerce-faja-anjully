@@ -5,7 +5,7 @@ import { useGlobalStore } from '../../store/global.store';
 import { formatPrice } from '../../helpers';
 import { Product } from '../../interfaces';
 import { useNavigate } from 'react-router-dom';
-import { searchProducts } from '../actions';
+import { searchProducts } from '../../actions';
 
 export const Search = () => {
 	const [searchTerm, setSearchTerm] = useState('');

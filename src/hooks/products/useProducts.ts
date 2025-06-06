@@ -1,4 +1,4 @@
-import { getProducts } from '@/components/actions';
+import { getProducts } from '@/actions';
 import { useQuery } from '@tanstack/react-query';
 
 

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { LuLoader } from 'react-icons/lu';
 import { Link, Navigate } from 'react-router-dom';
+import { useLogin } from '../hooks';
 import { Loader } from '../components/shared/Loader';
-import { useLogin } from '@/hooks/auth/useLogin';
 import { useUser } from '@/hooks/auth/useUser';
 
 export const LoginPage = () => {
-	const [email, setEmail] = useState('bdj04113@dcobe.com');
-	const [password, setPassword] = useState('Abc123');
+	const [email, setEmail] = useState('alexanderosma06@gmail.com');
+	const [password, setPassword] = useState('123456');
 
 	const { mutate, isPending } = useLogin();
 	const { session, isLoading } = useUser();

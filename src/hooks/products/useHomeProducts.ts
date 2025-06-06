@@ -1,4 +1,4 @@
-import { getRandomProducts, getRecentProducts } from '@/components/actions';
+import { getRandomProducts, getRecentProducts } from '@/actions';
 import { useQueries } from '@tanstack/react-query';
 
 

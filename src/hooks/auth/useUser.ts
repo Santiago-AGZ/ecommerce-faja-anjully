@@ -1,4 +1,4 @@
-import { getSession } from '@/components/actions';
+import { getSession } from '@/actions';
 import { useQuery } from '@tanstack/react-query';
 
 

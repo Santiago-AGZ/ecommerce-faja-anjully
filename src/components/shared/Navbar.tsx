@@ -9,8 +9,8 @@ import { FaBarsStaggered } from 'react-icons/fa6';
 import { Logo } from './Logo';
 import { useGlobalStore } from '../../store/global.store';
 import { useCartStore } from '../../store/cart.store';
+import { useCustomer, useUser } from '../../hooks';
 import { LuLoader } from 'react-icons/lu';
-import { useUser } from '@/hooks/auth/useUser';
 
 export const Navbar = () => {
 	const openSheet = useGlobalStore(state => state.openSheet);
@@ -25,7 +25,8 @@ export const Navbar = () => {
 
 	const { session, isLoading } = useUser();
 
-	//const userId = session?.user.id;
+	const userId = session?.user.id;
+	const { data: customer } = useCustomer(userId!);
 
 	return (
 		<header className='bg-[#c4879b] text-[#fbeaea] py-4 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12'>
@@ -61,7 +62,7 @@ export const Navbar = () => {
 							to='/account'
 							className='border-2 border-slate-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold'
 						>
-							R
+							{customer && customer.full_name[0]}
 						</Link>
 					</div>
 				) : (
