@@ -11,6 +11,9 @@ import {
 
 import { OrdersUserPage } from '@/pages/OrdersUserPage';
 import { ClientLayout } from '@/layouts/ClientLayout';
+import { OrderUserPage } from '@/pages/OrderUserPage';
+import { CheckoutPage } from '@/pages/CheckoutPage';
+import { ThankyouPage } from '@/pages/ThankyouPage';
 
 export const router = createBrowserRouter([
 	{
@@ -53,8 +56,20 @@ export const router = createBrowserRouter([
 						path: 'pedidos',
 						element: <OrdersUserPage />,
 					},
+					{
+						path: 'pedidos/:id',
+						element: <OrderUserPage />,
+					},
 				],
 			},
 		],
+	},
+	{
+		path: '/checkout',
+		element: <CheckoutPage />,
+	},
+	{
+		path: '/checkout/:id/thank-you',
+		element: <ThankyouPage />,
 	},
 ]);

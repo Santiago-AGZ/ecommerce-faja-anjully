@@ -1,7 +1,5 @@
-import { OrderInput } from '@/interfaces/order.interface';
-import { supabase } from '@/supabase/client';
-;
-
+import { OrderInput } from '../interfaces';
+import { supabase } from '../supabase/client';
 
 export const createOrder = async (order: OrderInput) => {
 	// 1. Obtener el usuario autenticado + Cliente de tabla customer
