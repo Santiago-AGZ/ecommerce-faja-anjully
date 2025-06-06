@@ -6,7 +6,7 @@ import { useUser } from '@/hooks/auth/useUser';
 import { signOut } from '@/actions';
 
 export const ClientLayout = () => {
-	const { session, isLoading: isLoadingSession } = useUser();
+	const {  isLoading: isLoadingSession } = useUser();
 	const navigate = useNavigate();
 
 	useEffect(() => {
