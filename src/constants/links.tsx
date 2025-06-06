@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa6";
+import { FaBoxOpen, FaCartShopping, FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa6";
 
 // This file contains the links for the navbar
 export const navbarLinks = [
@@ -38,4 +38,20 @@ export const  socialLinks = [
         href: "https://www.tiktok.com/@fajasanjully",
         icon: <FaTiktok/>,
     },
+];
+
+
+export const dashboardLinks = [
+	{
+		id: 1,
+		title: 'Productos',
+		href: '/dashboard/productos',
+		icon: <FaBoxOpen size={25} />,
+	},
+	{
+		id: 2,
+		title: 'Ordenes',
+		href: '/dashboard/ordenes',
+		icon: <FaCartShopping size={25} />,
+	},
 ];
