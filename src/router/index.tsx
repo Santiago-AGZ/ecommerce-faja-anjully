@@ -7,6 +7,7 @@ import {
 	RegisterPage,
     FajaPage,
     ProductsPage,
+	DashboardProductsPage,
 } from '../pages';
 
 import { OrdersUserPage } from '@/pages/OrdersUserPage';
@@ -14,6 +15,7 @@ import { ClientLayout } from '@/layouts/ClientLayout';
 import { OrderUserPage } from '@/pages/OrderUserPage';
 import { CheckoutPage } from '@/pages/CheckoutPage';
 import { ThankyouPage } from '@/pages/ThankyouPage';
+import { DashboardLayout } from '@/layouts/DashboardLayout';
 
 export const router = createBrowserRouter([
 	{
@@ -71,5 +73,19 @@ export const router = createBrowserRouter([
 	{
 		path: '/checkout/:id/thank-you',
 		element: <ThankyouPage />,
+	},
+	{
+		path: '/dashboard',
+		element: <DashboardLayout />,
+		children: [
+			{
+				index: true,
+				element: <Navigate to='/dashboard/productos' />,
+			},
+			{
+				path: 'productos',
+				element: <DashboardProductsPage />,
+			},
+		],
 	},
 ]);
