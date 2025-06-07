@@ -29,9 +29,10 @@ export const Banner = () => {
           </span>
         </h1>
         <p className="text-lg lg:text-2xl max-w-2xl mb-4 drop-shadow-md text-white/90">
-          Fajas premium que estilizan, moldean y te acompañan con elegancia en cada paso.
+          Fajas premium que estilizan, moldean y te acompañan con elegancia en
+          cada paso.
         </p>
-       
+
         <Link
           to="/productos"
           aria-label="Ver catálogo completo de productos"
