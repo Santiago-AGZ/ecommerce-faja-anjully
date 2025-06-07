@@ -84,6 +84,8 @@ export const productSchema = z.object({
         )
     )
     .min(1, "Debes subir al menos una imagen"),
+      images: z.array(z.instanceof(File)).optional(), // 👈 Aquí está la solución
+
 
   category: z.string().min(1, "La categoría es requerida"),
   variants: z
