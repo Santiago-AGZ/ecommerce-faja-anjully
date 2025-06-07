@@ -16,7 +16,7 @@ export const Banner = () => {
       />
       {/* Capa oscura suave para mejorar legibilidad */}
       <div
-        className="absolute inset-0 bg-black opacity-50 sm:opacity-40 transition-opacity duration-500"
+        className="absolute inset-0 bg-black opacity-50 sm:opacity-30 transition-opacity duration-500"
         aria-hidden="true"
       />
       {/* Contenido principal */}
