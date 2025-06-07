@@ -1,14 +1,13 @@
-
-import { Json } from '../supabase/supabase';
-
+import { Json } from "../supabase/supabase";
+import { JSONContent } from "@tiptap/react";
 export interface Color {
-	name: string;
-	color: string;
-	price: number;
+  name: string;
+  color: string;
+  price: number;
 }
 
 export interface VariantProduct {
-	id: string; 
+  id: string;
   stock: number;
   price: number;
   color: string;
@@ -31,7 +30,7 @@ export interface Product {
 }
 
 export interface PreparedProducts {
-	id: string;
+  id: string;
   name: string;
   slug: string;
   features: string[];
@@ -46,5 +45,24 @@ export interface PreparedProducts {
   variants: VariantProduct[];
   category?: string;
   line?: string;
-  
+}
+
+export interface ProductInput {
+  name: string;
+  slug: string;
+  category: string;
+  line: string;
+  features: string[];
+  description: JSONContent;
+  compression_level: string;
+  image_path:string;
+  variants: VariantINput[];
+}
+export interface VariantINput {
+  id?: string;
+  stock: number;
+  price: number;
+  color: string;
+  color_name: string;
+  size: string;
 }

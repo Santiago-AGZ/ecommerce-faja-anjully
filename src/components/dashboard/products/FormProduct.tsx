@@ -12,6 +12,8 @@ import { Editor } from "./Editor";
 import { FeaturesInput } from "./FeaturesInput";
 import { VariantsInput } from "./VariantsInput";
 import { SelectInput } from "./SelectInput";
+// import { createProduct } from "@/actions";
+import { useCreateProduct } from "@/hooks";
 
 // Opciones para los selects
 const categories = [
@@ -52,9 +54,22 @@ export const FormProduct = ({ titleForm, initialValues }: Props) => {
 
   const navigate = useNavigate();
 
+  const { mutate: createProduct,  } = useCreateProduct();
+
   const onSubmit = handleSubmit((data) => {
-    console.log("Product data:", data);
-    // Aquí iría la lógica para enviar los datos al servidor
+    const features = data.features.map((feature) => feature.value);
+
+    createProduct({
+      name: data.name,
+      slug: data.slug,
+      category: data.category,
+      line: data.line,
+      features,
+      description: data.description,
+      compression_level: data.compression_level,
+      image_path: Array.isArray(data.image_path) ? data.image_path[0] : data.image_path,
+      variants: data.variants,
+    });
   });
 
   const watchName = watch("name");
@@ -142,7 +157,6 @@ export const FormProduct = ({ titleForm, initialValues }: Props) => {
             required
           />
         </SectionFormProduct>
-
         {/* Sección 2: Características */}
         <SectionFormProduct titleSection="Características">
           <FeaturesInput
@@ -151,12 +165,10 @@ export const FormProduct = ({ titleForm, initialValues }: Props) => {
             errors={errors}
           />
         </SectionFormProduct>
-
         {/* Sección 3: Imágenes */}
         <SectionFormProduct titleSection="Imágenes del producto">
           <UploaderImages errors={errors} setValue={setValue} watch={watch} />
         </SectionFormProduct>
-
         {/* Sección 4: Variantes */}
         <SectionFormProduct
           titleSection="Variantes del producto"
@@ -168,7 +180,6 @@ export const FormProduct = ({ titleForm, initialValues }: Props) => {
             errors={errors}
           />
         </SectionFormProduct>
-
         {/* Sección 5: Descripción */}
         <SectionFormProduct
           titleSection="Descripción del producto"
@@ -176,7 +187,6 @@ export const FormProduct = ({ titleForm, initialValues }: Props) => {
         >
           <Editor setValue={setValue} errors={errors} />
         </SectionFormProduct>
-
         {/* Botones de acción */}
         <div className="flex gap-3 col-span-full justify-end">
           <button
@@ -190,6 +200,7 @@ export const FormProduct = ({ titleForm, initialValues }: Props) => {
             Guardar Producto
           </button>
         </div>
+        t
       </form>
     </div>
   );
