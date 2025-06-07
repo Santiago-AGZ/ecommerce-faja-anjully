@@ -8,6 +8,7 @@ import {
     FajaPage,
     ProductsPage,
 	DashboardProductsPage,
+	DashboardNewProductPage,
 } from '../pages';
 
 import { OrdersUserPage } from '@/pages/OrdersUserPage';
@@ -85,7 +86,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'productos',
 				element: <DashboardProductsPage />,
-			},
+			},{
+				path:'productos/new',
+				element: <DashboardNewProductPage />,
+			}
 		],
 	},
 ]);
