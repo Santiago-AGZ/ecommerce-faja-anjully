@@ -8,7 +8,7 @@ export const AboutPage = () => {
       <div className="w-full h-[2px] bg-[#f4c4c2]" />
 
       <img
-        src="https://lybhjmccubymolspkpfr.supabase.co/storage/v1/object/public/product-images/products/about%20us/foto.PNG"
+        src="/img/foto.webp"
         alt="Imagen de fondo"
         className="w-full max-w-4xl max-h-[500px] object-contain rounded-xl "
       />
