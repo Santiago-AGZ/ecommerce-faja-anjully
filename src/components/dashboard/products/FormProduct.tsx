@@ -21,6 +21,7 @@ import {
 } from '../../../hooks';
 import { Loader } from '../../shared/Loader';
 import { JSONContent } from '@tiptap/react';
+import { SelectInput } from './SelectInput';
 
 interface Props {
     titleForm: string;
@@ -157,34 +158,40 @@ export const FormProduct = ({ titleForm }: Props) => {
                         errors={errors}
                     />
 
-                    <InputForm
-                        type='text'
+                    <SelectInput
                         label='Nivel de Compresión'
                         name='compression_level'
                         placeholder='baja'
                         register={register}
                         errors={errors}
                         required
+                        setValue={setValue}
+                        watch={watch}
+                        type='select'
                     />
 
-                    <InputForm
-                        type='text'
+                    <SelectInput
                         label='Categoría'
                         name='category'
                         placeholder='Faja'
                         register={register}
                         errors={errors}
                         required
+                        setValue={setValue}
+                        watch={watch}
+                        type='select'
                     />
 
-                    <InputForm
-                        type='text'
+                    <SelectInput
                         label='Línea del Producto'
                         name='line'
                         placeholder='Reductora'
                         register={register}
                         errors={errors}
                         required
+                        setValue={setValue}
+                        watch={watch}
+                        type='select'
                     />
                 </SectionFormProduct>
 

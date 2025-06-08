@@ -29,13 +29,13 @@ export const ClientLayout = () => {
 	};
 
 	return (
-		<div className='flex flex-col gap-5'>
+		<div className='flex flex-col min-h-screen'>
 			{/* Menú */}
-			<nav className='flex justify-center gap-10 text-sm font-medium'>
+			<nav className='flex justify-center gap-10 text-sm font-medium py-4 bg-white shadow-sm'>
 				<NavLink
 					to='/account/pedidos'
 					className={({ isActive }) =>
-						`${isActive ? 'underline' : 'hover:underline'}`
+						`${isActive ? 'underline font-semibold' : 'hover:underline'}`
 					}
 				>
 					Pedidos
@@ -59,8 +59,10 @@ export const ClientLayout = () => {
 				</button>
 			</nav>
 
-			<main className='container mt-12 flex-1'>
-				<Outlet />
+			<main className='flex-1 py-8 px-4 sm:px-6 lg:px-8'>
+				<div className='max-w-7xl mx-auto'>
+					<Outlet />
+				</div>
 			</main>
 		</div>
 	);

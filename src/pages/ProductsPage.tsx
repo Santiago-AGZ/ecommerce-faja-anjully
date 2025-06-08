@@ -5,20 +5,33 @@ import { prepareProducts } from '../helpers';
 import { useFilteredProducts } from '../hooks';
 import { Pagination } from '../components/shared/Pagination';
 
+interface FilterState {
+	lines: string[];
+	compressionLevels: string[];
+	categories: string[];
+}
+
 export const ProductsPage = () => {
 	const [page, setPage] = useState(1);
-	const [selectedLines, setSelectedLines] = useState<string[]>([]);
-
-	const {
-		data: products = [],
-		isLoading,
-		totalProducts,
-	} = useFilteredProducts({
-		page,
-		lines: selectedLines,
+	const [selectedFilters, setSelectedFilters] = useState<FilterState>({
+		lines: [],
+		compressionLevels: [],
+		categories: []
 	});
 
-	const preparedProducts = prepareProducts(products);
+	const {
+  data: response, // Ahora response contiene data y count
+  isLoading,
+} = useFilteredProducts({
+  page,
+  filters: selectedFilters,
+});
+
+// Extraer los productos y el contador de la respuesta
+const products = response?.data || [];
+const totalProducts = response?.count || 0;
+
+const preparedProducts = prepareProducts(products);
 
 	return (
 		<>
@@ -29,8 +42,8 @@ export const ProductsPage = () => {
 			<div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
 				{/* FILTROS */}
 				<ContainerFilter
-					setSelectedLines={setSelectedLines}
-					selectedLines={selectedLines}
+					selectedFilters={selectedFilters}
+					setSelectedFilters={setSelectedFilters}
 				/>
 
 				{isLoading ? (
@@ -53,7 +66,6 @@ export const ProductsPage = () => {
 							))}
 						</div>
 
-						{/* TODO: Paginación */}
 						<Pagination
 							totalItems={totalProducts}
 							page={page}

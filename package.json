@@ -16,7 +16,7 @@
     "@radix-ui/react-slot": "^1.2.0",
     "@supabase/supabase-js": "^2.49.8",
     "@tailwindcss/vite": "^4.1.8",
-    "@tanstack/react-query": "^5.77.2",
+    "@tanstack/react-query": "^5.80.6",
     "@tiptap/pm": "^2.12.0",
     "@tiptap/react": "^2.14.0",
     "@tiptap/starter-kit": "^2.14.0",
@@ -30,7 +30,7 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.5.1",
     "tailwind-merge": "^3.2.0",
-    "tiptap": "^1.32.2",
+    "tiptap": "^0.15.0",
     "tw-animate-css": "^1.2.5",
     "zod": "^3.25.53",
     "zustand": "^5.0.5"
@@ -49,7 +49,7 @@
     "globals": "^16.0.0",
     "postcss": "^8.5.4",
     "tailwindcss": "^4.1.8",
-    "typescript": "~5.7.2",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.0"
   }
