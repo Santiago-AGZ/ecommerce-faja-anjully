@@ -71,15 +71,27 @@ export const formatDate = (date: string): string => {
 
 // Función para obtener el estado del pedido en español
 export const getStatus = (status: string): string => {
-  switch (status) {
-    case "Pending":
+  const statusLower = status.toLowerCase();
+  
+  switch (statusLower) {
+    case "pending":
       return "Pendiente";
-    case "Paid":
+    case "paid":
       return "Pagado";
-    case "Shipped":
+    case "processing":
+      return "Procesando";
+    case "shipped":
       return "Enviado";
-    case "Delivered":
+    case "delivered":
       return "Entregado";
+    case "cancelled":
+      return "Cancelado";
+    case "refunded":
+      return "Reembolsado";
+    case "on-hold":
+      return "En espera";
+    case "failed":
+      return "Fallido";
     default:
       return status;
   }

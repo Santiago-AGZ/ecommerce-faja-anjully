@@ -3,114 +3,125 @@ import { supabase } from "../supabase/client";
 import { extractFilePath } from "@/helpers";
 
 export const getProducts = async (page: number) => {
-  const itemsPerPage = 10;
-  const from = (page - 1) * itemsPerPage;
-  const to = from + itemsPerPage - 1;
+	const itemsPerPage = 10;
+	const from = (page - 1) * itemsPerPage;
+	const to = from + itemsPerPage - 1;
 
-  const {
-    data: products,
-    error,
-    count,
-  } = await supabase
-    .from("products")
-    .select("*, variants(*)", { count: "exact" })
-    .order("created_at", { ascending: false })
-    .range(from, to);
+	const {
+		data: products,
+		error,
+		count,
+	} = await supabase
+		.from("products")
+		.select("*, variants(*)", { count: "exact" })
+		.order("created_at", { ascending: false })
+		.range(from, to);
 
-  if (error) {
-    console.log(error.message);
-    throw new Error(error.message);
-  }
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
 
-  return { products, count };
+	return { products, count };
 };
 
 export const getFilteredProducts = async ({
-  page = 1,
-  lines = [],
-  limit = 12,
+	page = 1,
+	filters,
+	limit = 12,
 }: {
-  page: number;
-  lines: string[];
-  limit?: number;
+	page: number;
+	filters: {
+		lines: string[];
+		compressionLevels: string[];
+		categories: string[];
+	};
+	limit?: number;
 }) => {
-  const itemsPerPage = limit; // Usar el parámetro recibido
-  const from = (page - 1) * itemsPerPage;
-  const to = from + itemsPerPage - 1;
+	const itemsPerPage = limit;
+	const from = (page - 1) * itemsPerPage;
+	const to = from + itemsPerPage - 1;
 
-  let query = supabase
-    .from("products")
-    .select("*, variants(*)", { count: "exact" })
-    .order("created_at", { ascending: false })
-    .range(from, to);
+	let query = supabase
+		.from("products")
+		.select("*, variants(*)", { count: "exact" })
+		.order("created_at", { ascending: false })
+		.range(from, to);
 
-  if (lines.length > 0) {
-    query = query.in("line", lines);
-  }
+	// Aplicar filtros si existen
+	if (filters.lines.length > 0) {
+		query = query.in("line", filters.lines);
+	}
+	if (filters.compressionLevels.length > 0) {
+		query = query.in("compression_level", filters.compressionLevels);
+	}
+	if (filters.categories.length > 0) {
+		query = query.in("category", filters.categories);
+	}
 
-  const { data, error, count } = await query;
+	const { data, error, count } = await query;
 
-  if (error) {
-    console.log(error.message);
-    throw new Error(error.message);
-  }
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
 
-  return { data, count };
+	return { data, count };
 };
 
 export const getRecentProducts = async () => {
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*, variants(*)")
-    .order("created_at", { ascending: false })
-    .limit(4);
+	const { data: products, error } = await supabase
+		.from("products")
+		.select("*, variants(*)")
+		.order("created_at", { ascending: false })
+		.limit(4);
 
-  if (error) {
-    console.log(error.message);
-    throw new Error(error.message);
-  }
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
 
-  return products;
+	return products;
 };
 
 export const getRandomProducts = async () => {
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*, variants(*)")
-    .limit(20);
+	const { data: products, error } = await supabase
+		.from("products")
+		.select("*, variants(*)")
+		.limit(20);
 
-  if (error) {
-    console.log(error.message);
-    throw new Error(error.message);
-  }
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
 
-  // Seleccionar 4 productos al azar
-  const randomProducts = products.sort(() => 0.5 - Math.random()).slice(0, 4);
+	// Seleccionar 4 productos al azar
+	const randomProducts = products.sort(() => 0.5 - Math.random()).slice(0, 4);
 
-  return randomProducts;
+	return randomProducts;
 };
 
 export const getProductBySlug = async (slug: string) => {
-    if (!slug) {
-        throw new Error("El slug no puede estar vacío");
-    }
+	if (!slug) {
+		throw new Error("El slug no puede estar vacío");
+	}
 
-    const { data, error } = await supabase
-        .from('products')
-        .select('*, variants(*)')
-        .eq('slug', slug)
-        .limit(1);
+	const { data, error } = await supabase
+		.from('products')
+		.select('*, variants(*)')
+		.eq('slug', slug)
+		.limit(1);
 
-    if (error) {
-        console.log(error.message);
-        throw new Error(error.message);
-    }
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
 
-    if (!data || data.length === 0) {
-        throw new Error("Producto no encontrado");
-    }
+	if (!data || data.length === 0) {
+		throw new Error("Producto no encontrado");
+	}
 
-    return data[0];
+	return data[0];
 };
 
 
@@ -141,8 +152,8 @@ export const createProduct = async (productInput: ProductInput) => {
 				name: productInput.name,
 				line: productInput.line,
 				slug: productInput.slug,
-        		category: productInput.category,
-        		compression_level : productInput.compression_level,
+				category: productInput.category,
+				compression_level: productInput.compression_level,
 				features: productInput.features,
 				description: productInput.description,
 				images: [],
@@ -163,11 +174,10 @@ export const createProduct = async (productInput: ProductInput) => {
 
 				if (error) throw new Error(error.message);
 
-				const imageUrl = `${
-					supabase.storage
-						.from('product-images')
-						.getPublicUrl(data.path).data.publicUrl
-				}`;
+				const imageUrl = `${supabase.storage
+					.from('product-images')
+					.getPublicUrl(data.path).data.publicUrl
+					}`;
 
 				return imageUrl;
 			})
@@ -273,13 +283,13 @@ export const updateProduct = async (
 	const { data: updatedProduct, error: productError } = await supabase
 		.from('products')
 		.update({
-				name: productInput.name,
-				line: productInput.line,
-				slug: productInput.slug,
-        		category: productInput.category,
-        		compression_level : productInput.compression_level,
-				features: productInput.features,
-				description: productInput.description,
+			name: productInput.name,
+			line: productInput.line,
+			slug: productInput.slug,
+			category: productInput.category,
+			compression_level: productInput.compression_level,
+			features: productInput.features,
+			description: productInput.description,
 		})
 		.eq('id', productId)
 		.select()
@@ -294,7 +304,7 @@ export const updateProduct = async (
 
 	// 3.1 Identificar las imágenes que han sido eliminadas
 	const imagesToDelete = existingImages.filter(
-		image => !validImages.includes(image) 
+		image => !validImages.includes(image)
 	);
 
 	// 3.2 Obtener los paths de los archivos a eliminar
@@ -418,4 +428,52 @@ export const updateProduct = async (
 		throw new Error(deleteVariantsError.message);
 
 	return updatedProduct;
+};
+
+export const getUniqueCompressionLevels = async () => {
+	const { data, error } = await supabase
+		.from('products')
+		.select('compression_level')
+		.not('compression_level', 'is', null);
+
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
+
+	// Filtrar valores únicos
+	const uniqueLevels = [...new Set(data.map(item => item.compression_level))];
+	return uniqueLevels;
+};
+
+export const getUniqueLines = async () => {
+	const { data, error } = await supabase
+		.from('products')
+		.select('line')
+		.not('line', 'is', null);
+
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
+
+	// Filtrar valores únicos
+	const uniqueLines = [...new Set(data.map(item => item.line))];
+	return uniqueLines;
+};
+
+export const getUniqueCategories = async () => {
+	const { data, error } = await supabase
+		.from('products')
+		.select('category')
+		.not('category', 'is', null);
+
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
+
+	// Filtrar valores únicos
+	const uniqueCategories = [...new Set(data.map(item => item.category))];
+	return uniqueCategories;
 };

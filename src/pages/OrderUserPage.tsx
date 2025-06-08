@@ -13,6 +13,10 @@ export const OrderUserPage = () => {
 
 	if (isLoading || !order) return <Loader />;
 
+	// Calcular costo de envío (misma lógica que en el carrito)
+	const shippingCost = order.totalAmount > 300000 ? 0 : 20000;
+	const totalWithShipping = order.totalAmount + shippingCost;
+
 	return (
 		<div className='w-full px-4 md:px-8'>
 			{/* Encabezado */}
@@ -80,18 +84,29 @@ export const OrderUserPage = () => {
 			</div>
 
 			{/* Resumen de totales */}
-			<div className='flex flex-col items-end mt-10 text-sm text-gray-700 w-full md:w-1/2 ml-auto'>
+			<div className='flex flex-col items-end mt-10 text-sm text-gray-700 w-full md:w-1/2 ml-auto space-y-2'>
 				<div className='flex justify-between w-full'>
 					<p>Subtotal</p>
 					<p>{formatPrice(order.totalAmount)}</p>
 				</div>
+				
 				<div className='flex justify-between w-full'>
-					<p>Envío (Standard)</p>
-					<p>{formatPrice(0)}</p>
+					<div>
+						<p>Envío</p>
+						{shippingCost > 0 && (
+							<p className='text-xs text-gray-500'>
+								Gratis en compras mayores a {formatPrice(300000)}
+							</p>
+						)}
+					</div>
+					<p>{shippingCost === 0 ? 'Gratis' : formatPrice(shippingCost)}</p>
 				</div>
+				
+				<div className='border-t border-gray-200 w-full my-2'></div>
+				
 				<div className='flex justify-between w-full font-semibold text-black'>
 					<p>Total</p>
-					<p>{formatPrice(order.totalAmount)}</p>
+					<p>{formatPrice(totalWithShipping)}</p>
 				</div>
 			</div>
 
