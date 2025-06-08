@@ -125,8 +125,7 @@ export const FormCheckout = () => {
 					<div className='bg-stone-100 text-[13px] p-5 space-y-0.5 border border-gray-200 rounded-es-md rounded-ee-md'>
 						<p>Compra a traves de transferencia bancaria</p>
 						<p>BANCOLOMBIA</p>
-						<p>Razón Social: Fajas Anjully</p>
-						<p>RUC: 123456789000</p>
+						<p>Razón Social: Fajas Anjully</p>	
 						<p>Tipo de cuenta: Ahorros</p>
 						<p>Número de cuenta: 20500000318</p>
 						<p>

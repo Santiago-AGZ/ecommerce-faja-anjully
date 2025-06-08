@@ -60,7 +60,6 @@ export const ThankyouPage = () => {
 					<div className='space-y-0.5 text-sm'>
 						<p>BANCOLOMBIA </p>
 						<p>Razón Social: Fajas Anjully</p>
-						<p>RUC: 123456789000</p>
 						<p>Tipo de cuenta: Ahorros</p>
 						<p>Número de cuenta: 20500000318</p>
 					</div>
