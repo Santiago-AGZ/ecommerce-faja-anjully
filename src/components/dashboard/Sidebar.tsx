@@ -10,7 +10,7 @@ export const Sidebar = () => {
 	};
 
 	return (
-		<div className='w-[120px] bg-stone-800 text-white flex flex-col gap-10 items-center p-5 fixed h-screen lg:w-[250px]'>
+		<div className='w-[120px] bg-[#c4879b] text-white flex flex-col gap-10 items-center p-5 fixed h-screen lg:w-[250px]'>
 			<Logo isDashboard/>
 
 			<nav className='w-full space-y-5 flex-1'>
@@ -35,7 +35,7 @@ export const Sidebar = () => {
 			</nav>
 
 			<button
-				className='bg-red-500 w-full py-[10px] rounded-md flex items-center justify-center gap-2 font-semibold text-sm hover:underline'
+				className='bg-[#6d3843] w-full py-[10px] rounded-md flex items-center justify-center gap-2 font-semibold text-sm hover:underline'
 				onClick={handleLogout}
 			>
 				<span className='hidden lg:block'>Cerrar sesión</span>

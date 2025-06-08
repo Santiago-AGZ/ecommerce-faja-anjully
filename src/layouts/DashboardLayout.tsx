@@ -7,48 +7,62 @@ import { Loader } from '../components/shared/Loader';
 import { supabase } from '../supabase/client';
 
 export const DashboardLayout = () => {
-	const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { isLoading } = useUser();
+    const [roleLoading, setRoleLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
-	const { isLoading, session } = useUser();
-	const [roleLoading, setRoleLoading] = useState(true);
+    useEffect(() => {
+        const checkAuthAndRole = async () => {
+            try {
+                // 1. Verificar sesión primero
+                const currentSession = await getSession();
+                if (!currentSession) {
+                    navigate('/login', { replace: true });
+                    return;
+                }
 
-	useEffect(() => {
-		const checkRole = async () => {
-			setRoleLoading(true);
-			const session = await getSession();
-			if (!session) {
-				navigate('/login');
-			}
+                // 2. Verificar rol
+                const role = await getUserRole(currentSession.session?.user.id as string);
+                if (role !== 'admin') {
+                    navigate('/', { replace: true });
+                    return;
+                }
 
-			const role = await getUserRole(
-				session.session?.user.id as string
-			);
+                setIsAdmin(true);
+            } catch (error) {
+                console.error('Error verifying session or role:', error);
+                navigate('/login', { replace: true });
+            } finally {
+                setRoleLoading(false);
+            }
+        };
 
-			if (role !== 'admin') {
-				navigate('/', { replace: true });
-			}
+        checkAuthAndRole();
 
-			setRoleLoading(false);
-		};
+        // Suscripción a cambios de autenticación
+        const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+            if (event === 'SIGNED_OUT' || !session) {
+                navigate('/login', { replace: true });
+            }
+        });
 
-		checkRole();
+        return () => {
+            authListener?.subscription.unsubscribe();
+        };
+    }, [navigate]);
 
-		supabase.auth.onAuthStateChange(async (event, session) => {
-			if (event === 'SIGNED_OUT' || !session) {
-				navigate('/login', { replace: true });
-			}
-		});
-	}, [navigate]);
+    // Mostrar loader mientras se verifican credenciales
+    if (isLoading || roleLoading || !isAdmin) {
+        return <Loader />;
+    }
 
-	if (isLoading || !session || roleLoading) return <Loader />;
-
-	return (
-		<div className='flex bg-gray-100 min-h-screen font-montserrat'>
-			<Sidebar />
-
-			<main className='container m-5 mt-7 flex-1 text-slate-800 ml-[140px] lg:ml-[270px]'>
-				<Outlet />
-			</main>
-		</div>
-	);
+    return (
+        <div className='flex bg-gray-100 min-h-screen font-montserrat'>
+            <Sidebar />
+            <main className='container m-5 mt-7 flex-1 text-slate-800 ml-[140px] lg:ml-[270px]'>
+                <Outlet />
+            </main>
+        </div>
+    );
 };
