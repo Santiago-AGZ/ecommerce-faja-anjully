@@ -1,76 +1,83 @@
-import { useState } from "react";
-import {
-  useFieldArray,
-  Control,
-  UseFormRegister,
-  FieldErrors,
-} from "react-hook-form";
-import { ProductFormValues } from "../../../lib/validators";
+import { Control, FieldErrors, useFieldArray } from 'react-hook-form';
+import { ProductFormValues } from '../../../lib/validators';
+import { useState } from 'react';
 
 interface Props {
-  control: Control<ProductFormValues>;
-  register: UseFormRegister<ProductFormValues>;
-  errors: FieldErrors<ProductFormValues>;
+	control: Control<ProductFormValues>;
+	errors: FieldErrors<ProductFormValues>;
 }
 
 export const FeaturesInput = ({ control, errors }: Props) => {
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "features",
-  });
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name: 'features',
+	});
 
-  const [newFeature, setNewFeature] = useState("");
+	const [newFeature, setNewFeature] = useState('');
 
-  const handleAddFeature = () => {
-    if (newFeature.trim() === "") return;
+	const handleAddFeature = () => {
+		if (newFeature.trim() === '') return;
 
-    append({ value: newFeature }); // Ahora append un objeto con value
-    setNewFeature("");
-  };
+		append({ value: newFeature });
+		setNewFeature('');
+	};
 
-  return (
-    <div className="flex flex-col gap-2">
-      <label className="text-sm font-medium text-slate-700">
-        Características
-      </label>
+	const handleKeyDown = (
+		e: React.KeyboardEvent<HTMLInputElement>
+	) => {
+		if (e.key === 'Enter') {
+			e.preventDefault();
+			handleAddFeature();
+		}
+	};
 
-      <div className="flex gap-2">
-        <input
-          type="text"
-          value={newFeature}
-          onChange={(e) => setNewFeature(e.target.value)}
-          placeholder="Ej. Resistente al agua"
-          className="flex-1 border rounded-md px-3 py-1.5 text-sm font-normal focus:outline-none"
-        />
-        <button
-          type="button"
-          onClick={handleAddFeature}
-          className="text-sm font-medium text-white bg-slate-800 px-3 py-1.5 rounded-md hover:bg-slate-700 cursor-pointer"
-        >
-          Añadir
-        </button>
-      </div>
+	return (
+		<div className='flex flex-col gap-2'>
+			<label className='text-xs font-bold tracking-tight capitalize text-slate-900'>
+				Características:
+			</label>
 
-      <ul className="space-y-1 mt-2">
-        {fields.map((feature, index) => (
-          <li key={feature.id} className="flex justify-between items-center">
-            <span className="text-sm text-slate-700">{feature.value}</span>
-            <button
-              type="button"
-              onClick={() => remove(index)}
-              className="text-sm text-red-500 font-bold hover:scale-110"
-            >
-              X
-            </button>
-          </li>
-        ))}
-      </ul>
+			<ul className='space-y-3 pl-5'>
+				{fields.map((field, index) => (
+					<li
+						key={field.id}
+						className='flex items-center justify-between gap-2'
+					>
+						<div className='flex items-center gap-2'>
+							<div className='bg-slate-500 h-2 w-2 rounded-full' />
+							<span className='text-sm text-slate-600 font-medium'>
+								{field.value}
+							</span>
+						</div>
 
-      {errors.features && (
-        <p className="text-red-500 text-sm">
-          {errors.features.message?.toString()}
-        </p>
-      )}
-    </div>
-  );
-};
+						<button
+							type='button'
+							onClick={() => remove(index)}
+							className='text-sm text-red-500 font-bold pr-2 hover:scale-110'
+						>
+							X
+						</button>
+					</li>
+				))}
+			</ul>
+
+			<input
+				type='text'
+				placeholder='Reduce Figura'
+				className={`border border-gray-300 py-1.5 text-sm rounded-md px-3 font-medium tracking-tighter text-slate-600 outline-none focus:outline-none ${
+					errors.features ? 'border-red-500' : ''
+				}`}
+				autoComplete='off'
+				value={newFeature}
+				onChange={e => setNewFeature(e.target.value)}
+				onKeyDown={handleKeyDown}
+			/>
+
+			{errors.features && (
+				<p className='text-red-500 text-xs mt-1'>
+					{errors.features.message}
+				</p>
+			)}
+		</div>
+	);
+};  

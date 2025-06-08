@@ -48,21 +48,22 @@ export interface PreparedProducts {
 }
 
 export interface ProductInput {
-  name: string;
-  slug: string;
+	name: string;
+	line: string;
+	slug: string;
   category: string;
-  line: string;
-  features: string[];
-  description: JSONContent;
+	features: string[];
+	description: JSONContent;
   compression_level: string;
-  image_path:string;
-  variants: VariantINput[];
+	images: File[];
+	variants: VariantInput[];
 }
-export interface VariantINput {
-  id?: string;
-  stock: number;
-  price: number;
-  color: string;
-  color_name: string;
-  size: string;
+
+export interface VariantInput {
+	id?: string;
+	stock: number;
+	price: number;
+	color: string;
+	size: string;
+	colorName: string;
 }

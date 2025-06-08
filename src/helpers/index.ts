@@ -91,3 +91,13 @@ export const generateSlug = (name: string): string => {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 };
+
+
+// Función para extraer el path relativo al bucket de una URL
+export const extractFilePath = (url: string) => {
+	const baseUrl = 'https://lybhjmccubymolspkpfr.supabase.co/storage/v1/object/public/product-images/';
+	if (!url.startsWith(baseUrl)) {
+		throw new Error(`URL no válida: ${url}`);
+	}
+	return url.replace(baseUrl, '');
+};

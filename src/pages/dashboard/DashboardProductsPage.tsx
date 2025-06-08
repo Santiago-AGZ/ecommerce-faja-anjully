@@ -1,7 +1,6 @@
-import { TableProduct } from '@/components/dashboard';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-
+import { TableProduct } from '../../components/dashboard';
 
 export const DashboardProductsPage = () => {
 	return (
