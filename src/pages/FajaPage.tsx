@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 interface Acc {
 	[key: string]: {
 		name: string;
-		storages: string[];
+		sizes: string[];
 	};
 }
 
@@ -36,7 +36,7 @@ export const FajaPage = () => {
 		null
 	);
 
-	const [selectedStorage, setSelectedStorage] = useState<
+	const [selectedSize, setSelectedSize] = useState<
 		string | null
 	>(null);
 
@@ -60,12 +60,12 @@ export const FajaPage = () => {
 					if (!acc[color]) {
 						acc[color] = {
 							name: color_name,
-							storages: [],
+							sizes: [],
 						};
 					}
 
-					if (!acc[color].storages.includes(size)) {
-						acc[color].storages.push(size);
+					if (!acc[color].sizes.includes(size)) {
+						acc[color].sizes.push(size);
 					}
 
 					return acc;
@@ -85,23 +85,23 @@ export const FajaPage = () => {
 
 	// Actualizar el almacenamiento seleccionado cuando cambia el color
 	useEffect(() => {
-		if (selectedColor && colors[selectedColor] && !selectedStorage) {
-			setSelectedStorage(colors[selectedColor].storages[0]);
+		if (selectedColor && colors[selectedColor] && !selectedSize) {
+			setSelectedSize(colors[selectedColor].sizes[0]);
 		}
-	}, [selectedColor, colors, selectedStorage]);
+	}, [selectedColor, colors, selectedSize]);
 
 	// Obtener la variante seleccionada
 	useEffect(() => {
-		if (selectedColor && selectedStorage) {
+		if (selectedColor && selectedSize) {
 			const variant = product?.variants.find(
 				variant =>
 					variant.color === selectedColor &&
-					variant.size === selectedStorage
+					variant.size === selectedSize
 			);
 
 			setSelectedVariant(variant as VariantProduct);
 		}
-	}, [selectedColor, selectedStorage, product?.variants]);
+	}, [selectedColor, selectedSize, product?.variants]);
 
 	// Obtener el stock
 	const isOutOfStock = selectedVariant?.stock === 0;
@@ -115,7 +115,7 @@ export const FajaPage = () => {
 				name: product?.name || '',
 				image: product?.images[0] || '',
 				color: selectedVariant.color_name,
-				storage: selectedVariant.size,
+				size: selectedVariant.size,
 				price: selectedVariant.price,
 				quantity: count,
 			});
@@ -134,7 +134,7 @@ export const FajaPage = () => {
 				name: product?.name || '',
 				image: product?.images[0] || '',
 				color: selectedVariant.color_name,
-				storage: selectedVariant.size,
+				size: selectedVariant.size,
 				price: selectedVariant.price,
 				quantity: count,
 			});
@@ -149,7 +149,7 @@ export const FajaPage = () => {
 
 		// Reiniciar color, almacenamiento y variante seleccionada
 		setSelectedColor(null);
-		setSelectedStorage(null);
+		setSelectedSize(null);
 		setSelectedVariant(null);
 	}, [slug]);
 
@@ -173,6 +173,8 @@ export const FajaPage = () => {
 						{product.name}
 					</h1>
 
+					
+
 					<div className='flex gap-5 items-center'>
 						<span className='tracking-wide text-lg font-semibold'>
 							{formatPrice(
@@ -191,6 +193,12 @@ export const FajaPage = () => {
 
 					{/* Características */}
 					<ul className='space-y-2 ml-7 my-10'>
+						{product.compression_level && (
+							<li className='text-sm flex items-center gap-2 tracking-tight font-medium'>
+							<span className='bg-black w-[5px] h-[5px] rounded-full' />
+							Nivel de compresión: {product.compression_level}
+							</li>
+						)}
 						{product.features?.map(feature => (
 							<li
 								key={feature}
@@ -236,10 +244,10 @@ export const FajaPage = () => {
 							<div className='flex gap-3'>
 								<select
 									className='border border-gray-300 rounded-lg px-3 py-1'
-									value={selectedStorage || ''}
-									onChange={e => setSelectedStorage(e.target.value)}
+									value={selectedSize || ''}
+									onChange={e => setSelectedSize(e.target.value)}
 								>
-									{colors[selectedColor].storages.map(size => (
+									{colors[selectedColor].sizes.map(size => (
 										<option value={size} key={size}>
 											{size}
 										</option>

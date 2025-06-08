@@ -5,15 +5,18 @@ import { Link } from 'react-router-dom';
 import { RiSecurePaymentLine } from 'react-icons/ri';
 import { CartItem } from './CartItem';
 import { useCartStore } from '../../store/cart.store';
+import { formatPrice } from '../../helpers';
 
 export const Cart = () => {
 	const closeSheet = useGlobalStore(state => state.closeSheet);
-
 	const cartItems = useCartStore(state => state.items);
 	const cleanCart = useCartStore(state => state.cleanCart);
-	const totalItemsInCart = useCartStore(
-		state => state.totalItemsInCart
-	);
+	const totalItemsInCart = useCartStore(state => state.totalItemsInCart);
+	const totalAmount = useCartStore(state => state.totalAmount);
+
+	// Calcular costo de envío
+	const shippingCost = totalAmount > 300000 ? 0 : 20000;
+	const totalWithShipping = totalAmount + shippingCost;
 
 	return (
 		<div className='flex flex-col h-full'>
@@ -38,8 +41,31 @@ export const Cart = () => {
 						</ul>
 					</div>
 
+					{/* RESUMEN DE COMPRA */}
+					<div className='px-7 py-4 border-t border-slate-200'>
+						<div className='flex justify-between text-sm mb-2'>
+							<span>Subtotal:</span>
+							<span>{formatPrice(totalAmount)}</span>
+						</div>
+						<div className='flex justify-between text-sm mb-2'>
+							<span>Envío:</span>
+							<span>
+								{shippingCost === 0 ? 'Gratis' : formatPrice(shippingCost)}
+								{shippingCost > 0 && (
+									<span className='text-xs text-gray-500 block'>
+										Gratis en compras mayores a {formatPrice(300000)}
+									</span>
+								)}
+							</span>
+						</div>
+						<div className='flex justify-between font-bold mt-3'>
+							<span>Total:</span>
+							<span>{formatPrice(totalWithShipping)}</span>
+						</div>
+					</div>
+
 					{/* BOTONES ACCIÓN */}
-					<div className='mt-4 p-7'>
+					<div className='mt-2 p-7 pt-0'>
 						<Link
 							to='/checkout'
 							className='w-full bg-black text-white py-3.5 rounded-full flex items-center justify-center gap-3'

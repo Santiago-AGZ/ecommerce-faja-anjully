@@ -48,9 +48,11 @@ export const CardProduct = ({
 					/>
 				</div>
 
-				<button className='bg-white border border-slate-200 absolute w-full bottom-0 py-3 rounded-3xl flex items-center justify-center gap-1 text-sm font-medium hover:bg-stone-100 translate-y-[100%] transition-all duration-300 group-hover:translate-y-0'>
+				<button
+					className='bg-white border border-slate-200 absolute w-full bottom-0 py-3 rounded-3xl flex items-center justify-center gap-1 text-sm font-medium hover:bg-stone-100 translate-y-[100%] transition-all duration-300 group-hover:translate-y-0'
+				>
 					<FiPlus />
-					Añadir
+					Escoge a tu medida
 				</button>
 			</Link>
 
@@ -64,10 +66,10 @@ export const CardProduct = ({
 					{colors.map(color => (
 						<span
 							key={color.color}
-							className={`grid place-items-center w-6 h-6 rounded-full cursor-pointer bg-gray-100`}
+							className="grid place-items-center w-5 h-5 rounded-full border border-black"
 						>
 							<span
-								className='w-[18px] h-[18px] rounded-full border border-gray-300'
+								className='w-[14px] h-[14px] rounded-full'
 								style={{
 									backgroundColor: color.color,
 								}}

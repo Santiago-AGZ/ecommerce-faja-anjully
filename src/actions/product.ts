@@ -290,11 +290,11 @@ export const updateProduct = async (
 	// 3. Manejo de imágenes (SUBIR NUEVAS y ELIMINAR ANTIGUAS SI ES NECESARIO)
 	const folderName = productId;
 
-	const validImages = productInput.images.filter(image => image);
+	const validImages = productInput.images.filter(image => image) as [File | String];
 
 	// 3.1 Identificar las imágenes que han sido eliminadas
 	const imagesToDelete = existingImages.filter(
-		image => !validImages.includes(image)
+		image => !validImages.includes(image) 
 	);
 
 	// 3.2 Obtener los paths de los archivos a eliminar

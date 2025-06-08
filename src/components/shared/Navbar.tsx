@@ -29,7 +29,7 @@ export const Navbar = () => {
 	const { data: customer } = useCustomer(userId!);
 
 	return (
-		<header className='bg-[#c4879b] text-[#fbeaea] py-4 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12'>
+		<header className='bg-[#c4879b] text-[#fbeaea] py-1 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12'>
 			<Logo />
 
 			<nav className='space-x-5 hidden md:flex'>

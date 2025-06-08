@@ -18,6 +18,8 @@ import { CheckoutPage } from '@/pages/CheckoutPage';
 import { ThankyouPage } from '@/pages/ThankyouPage';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
 import { DashboardProductSlugPage } from '@/pages/dashboard/DashboardProductSlugPage';
+import { DashboardOrdersPage } from '@/pages/dashboard/DashboardOrdersPage';
+import { DashboardOrderPage } from '@/pages/dashboard/DashboardOrderPage';
 
 export const router = createBrowserRouter([
 	{
@@ -95,6 +97,14 @@ export const router = createBrowserRouter([
 			{
 				path: 'productos/editar/:slug',
 				element: <DashboardProductSlugPage />,
+			},
+			{
+				path: 'ordenes',
+				element: <DashboardOrdersPage />,
+			},
+			{
+				path: 'ordenes/:id',
+				element: <DashboardOrderPage />,
 			},
 		],
 	},

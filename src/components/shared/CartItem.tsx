@@ -7,7 +7,7 @@ export interface ICartItem {
 	productId: string;
 	name: string;
 	color: string;
-	storage: string;
+	size: string;
 	price: number;
 	quantity: number;
 	image: string;
@@ -45,13 +45,16 @@ export const CartItem = ({ item }: Props) => {
 				<div className='flex justify-between'>
 					<p className='font-semibold'>{item.name}</p>
 					<p className='text-sm font-medium text-gray-600 mt-1'>
-						{formatPrice(item.price)}
+						{formatPrice(item.price * item.quantity)} {/* Mostrar total por producto */}
 					</p>
 				</div>
 
-				<div className='flex gap-3'>
+				<div className='flex gap-3 justify-between items-center'>
 					<p className='text-[13px] text-gray-600'>
-						{item.storage} / {item.color}
+						{item.size} / {item.color}
+					</p>
+					<p className='text-xs text-gray-500'>
+						{formatPrice(item.price)} Unidad
 					</p>
 				</div>
 
@@ -60,6 +63,7 @@ export const CartItem = ({ item }: Props) => {
 						<button
 							onClick={decrement}
 							disabled={item.quantity === 1}
+							className='disabled:opacity-50'
 						>
 							<LuMinus size={15} />
 						</button>
