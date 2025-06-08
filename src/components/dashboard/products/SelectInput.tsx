@@ -30,7 +30,7 @@ export const SelectInput = ({
     type,
 }: SelectInputProps) => {
     const [options, setOptions] = useState<string[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [, setIsLoading] = useState(false);
     const [newOption, setNewOption] = useState('');
 
     useEffect(() => {
