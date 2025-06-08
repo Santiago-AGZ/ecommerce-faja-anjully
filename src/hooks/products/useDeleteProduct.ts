@@ -1,23 +1,25 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createProduct } from '../../actions';
-import { useNavigate } from 'react-router-dom';
+import { deleteProduct } from '../../actions';
 import toast from 'react-hot-toast';
 
-export const useCreateProduct = () => {
+export const useDeleteProduct = () => {
 	const queryClient = useQueryClient();
-	const navigate = useNavigate();
 
 	const { mutate, isPending } = useMutation({
-		mutationFn: createProduct,
+		mutationFn: deleteProduct,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ['products'],
 			});
-			navigate('/dashboard/productos');
+			toast.success('Producto eliminado correctamente', {
+				position: 'bottom-right',
+			});
 		},
 		onError: error => {
-			toast.error('Ocurrió un error al crear el producto');
 			console.log(error);
+			toast.error('Ocurrió un error al eliminar el producto', {
+				position: 'bottom-right',
+			});
 		},
 	});
 

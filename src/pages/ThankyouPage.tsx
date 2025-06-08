@@ -26,49 +26,49 @@ export const ThankyouPage = () => {
 
 	if (isLoading || !data || isLoadingSession) return <Loader />;
 
-	return (
-	<div className='flex flex-col h-screen'>
-		<header className='bg-[#c4879b] text-[#fbeaea] py-4 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12'>
-			<Link
-				to='/'
-				className='text-4xl font-bold self-center tracking-tighter transition-all md:text-5xl md:self-start text-[#6d3843]'
-			>
-				<p>
-					Fajas <span className='text-[#fbeaea]'>Anjully</span>
-				</p>
-			</Link>
-		</header>
+	// Calcular costo de envío (coherente con ItemsCheckout)
+	const shippingCost = data.totalAmount > 300000 ? 0 : 20000;
+	const totalWithShipping = data.totalAmount + shippingCost;
 
-		<main className='flex-1 flex flex-col items-center justify-center gap-10 p-10'>
+	return (
+		<div className='flex flex-col h-screen'>
+			<header className='bg-[#c4879b] text-[#fbeaea] py-4 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12'>
+				<Link
+					to='/'
+					className='text-4xl font-bold self-center tracking-tighter transition-all md:text-5xl md:self-start text-[#6d3843]'
+				>
+					<p>
+						Fajas <span className='text-[#fbeaea]'>Anjully</span>
+					</p>
+				</Link>
+			</header>
+
+			<main className='flex-1 flex flex-col items-center justify-center gap-10 p-10'>
 				<div className='flex gap-3 items-center'>
 					<CiCircleCheck size={40} />
-
-					<p className='text-4xl'>
-						¡Gracias, {data.customer.full_name}!
-					</p>
+					<p className='text-4xl'>¡Gracias, {data.customer.full_name}!</p>
 				</div>
 
 				<div className='border border-slate-200 w-full md:w-[600px] p-5 rounded-md space-y-3'>
 					<h3 className='font-medium'>Tu pedido está confirmado</h3>
-
 					<p className='text-sm'>
-						Gracias por realizar tu compra en Celularesbaratos. Para
+						Gracias por realizar tu compra en Fajas Anjully. Para
 						realizar la transferencia te compartimos los siguientes
 						datos
 					</p>
 
 					<div className='space-y-0.5 text-sm'>
-						<p>BANCO PICHINCHA</p>
-						<p>Razón Social: CelularesBaratos</p>
+						<p>BANCOLOMBIA </p>
+						<p>Razón Social: Fajas Anjully</p>
 						<p>RUC: 123456789000</p>
-						<p>Tipo de cuenta: Corriente</p>
-						<p>Número de cuenta: 1234567890</p>
+						<p>Tipo de cuenta: Ahorros</p>
+						<p>Número de cuenta: 20500000318</p>
 					</div>
 
 					<p className='text-sm'>
 						Una vez realizada la transferencia, comparte tu
-						comprobante a ventas@celularesbaratos.com para procesarla
-						y hacerte la entrega de tu dispositivo a domicilio.
+						comprobante a FajasAnjully@gmail.com para procesarla
+						y hacerte la entrega de tu producto a domicilio.
 					</p>
 				</div>
 
@@ -102,7 +102,7 @@ export const ThankyouPage = () => {
 
 										<div className='flex gap-3'>
 											<p className='text-[13px] text-gray-600'>
-												{item.storage} / {item.color_name}
+												{item.size} / {item.color_name}
 											</p>
 										</div>
 									</div>
@@ -110,36 +110,35 @@ export const ThankyouPage = () => {
 							))}
 						</ul>
 
-						<div className='flex justify-between'>
-							<span className='font-semibold'>Total:</span>
-							<span className='font-semibold'>
-								{formatPrice(data.totalAmount)}
-							</span>
+						<div className='space-y-4 text-sm text-stone-700'>
+							<div className='flex justify-between'>
+								<p className='font-medium'>Envío</p>
+								<p className='uppercase font-medium'>
+									{shippingCost === 0 ? 'Gratis' : formatPrice(shippingCost)}
+								</p>
+							</div>
+							<div className='flex justify-between font-bold text-base text-black'>
+								<p>Total</p>
+								<p>{formatPrice(totalWithShipping)}</p>
+							</div>
 						</div>
 					</div>
 
 					<div className='grid grid-cols-2 gap-5'>
 						<div className='flex flex-col text-sm'>
-							<p className='font-semibold'>
-								Información de contacto:
-							</p>
+							<p className='font-semibold'>Información de contacto:</p>
 							<p>{data.customer.email}</p>
 						</div>
 
 						<div className='flex flex-col text-sm'>
 							<p className='font-semibold'>Métodos de pago:</p>
-							<p>
-								Deposito bancario - {formatPrice(data.totalAmount)}
-							</p>
+							<p>Deposito bancario - {formatPrice(totalWithShipping)}</p>
 						</div>
 
 						<div className='flex flex-col text-sm'>
 							<p className='font-semibold'>Dirección de envío</p>
 							<p>{data.address.addressLine1}</p>
-							<p>
-								{data.address.addressLine2 &&
-									data.address.addressLine2}
-							</p>
+							<p>{data.address.addressLine2 && data.address.addressLine2}</p>
 							<p>{data.address.city}</p>
 							<p>{data.address.state}</p>
 							<p>{data.address.postalCode}</p>
@@ -157,7 +156,6 @@ export const ThankyouPage = () => {
 					<p className='text-sm'>
 						¿Necesitas ayuda? Ponte en contacto con nosotros
 					</p>
-
 					<Link
 						to='/productos'
 						className='text-white bg-black py-4 text-sm rounded-md px-5 tracking-tight font-semibold'

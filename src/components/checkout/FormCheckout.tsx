@@ -80,7 +80,7 @@ export const FormCheckout = () => {
 						register={register}
 						errors={errors}
 						name='state'
-						placeholder='Estado / Provincia'
+						placeholder='Departamento'
 					/>
 
 					<InputAddress
@@ -101,16 +101,19 @@ export const FormCheckout = () => {
 						className='border border-slate-200 rounded-md p-3'
 						{...register('country')}
 					>
-						<option value='Ecuador'>Colombia</option>
+						<option value='Colombia'>Colombia</option>
 					</select>
 				</div>
 
-				<div className='flex flex-col gap-3'>
+				<div className='flex flex-col '>
 					<p className='text-sm font-medium'>Métodos de envío</p>
 
-					<div className='flex justify-between items-center text-sm border border-slate-600 bg-stone-100 py-4 rounded-md px-6'>
+					<div className='flex justify-between items-center text-sm border border-slate-600 bg-stone-100 py-4 rounded-ss-md rounded-se-md px-6'>
 						<span className='font-normal'>Standard</span>
-						<span className='font-semibold'>Gratis</span>
+					</div>
+
+					<div className='bg-stone-100 text-[13px] p-5 space-y-0.5 border border-gray-200 rounded-es-md rounded-ee-md'>
+						<p>Por compras mayores a $ 300.000, envio Gratis</p>
 					</div>
 				</div>
 
@@ -121,11 +124,11 @@ export const FormCheckout = () => {
 
 					<div className='bg-stone-100 text-[13px] p-5 space-y-0.5 border border-gray-200 rounded-es-md rounded-ee-md'>
 						<p>Compra a traves de transferencia bancaria</p>
-						<p>BANCO DE BOGOTA</p>
-						<p>Razón Social: FajasAnujully</p>
+						<p>BANCOLOMBIA</p>
+						<p>Razón Social: Fajas Anjully</p>
 						<p>RUC: 123456789000</p>
-						<p>Tipo de cuenta: Corriente</p>
-						<p>Número de cuenta: 1234567890</p>
+						<p>Tipo de cuenta: Ahorros</p>
+						<p>Número de cuenta: 20500000318</p>
 						<p>
 							La información será compartida nuevamente una vez que se
 							haya finalizado la compra

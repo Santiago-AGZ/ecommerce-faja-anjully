@@ -14,7 +14,7 @@ export const FeatureGrid = () => {
       <div className="flex flex-col items-center gap-3 p-6 bg-[#F8F1F4] rounded-lg">
         <MdLocalShipping size={48} /> {/* Sin color asignado */}
         <p className="font-bold text-lg">Envío gratis</p>
-        <p className="text-sm text-center text-[#4B1E2F]">En compras desde $150.000</p>
+        <p className="text-sm text-center text-[#4B1E2F]">En compras desde $300.000</p>
       </div>
 
       {/* Devoluciones */}

@@ -1,52 +1,65 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { signOut } from '../actions';
+import { useRoleUser, useUser } from '../hooks';
 import { useEffect } from 'react';
 import { supabase } from '../supabase/client';
 import { Loader } from '../components/shared/Loader';
-import { useUser } from '@/hooks/auth/useUser';
-import { signOut } from '@/actions';
+import { HiOutlineExternalLink } from 'react-icons/hi';
 
 export const ClientLayout = () => {
-	const {  isLoading: isLoadingSession } = useUser();
+	const { session, isLoading: isLoadingSession } = useUser();
+	const { data: role, isLoading: isLoadingRole } = useRoleUser(
+		session?.user.id as string
+	);
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		supabase.auth.onAuthStateChange(async (event, session) => {
 			if (event === 'SIGNED_OUT' || !session) {
-				navigate('/login');
+				navigate('/login', { replace: true });
 			}
 		});
 	}, [navigate]);
 
-	if (isLoadingSession) return <Loader />;
+	if (isLoadingSession || isLoadingRole) return <Loader />;
 
 	const handleLogout = async () => {
 		await signOut();
 	};
 
 	return (
-		<div className='w-full min-h-screen flex flex-col items-center px-4 md:px-8 py-10'>
-			{/* Menú de navegación */}
-			<nav className='flex items-center justify-center gap-8 text-sm font-semibold text-stone-700 mb-12'>
+		<div className='flex flex-col gap-5'>
+			{/* Menú */}
+			<nav className='flex justify-center gap-10 text-sm font-medium'>
 				<NavLink
 					to='/account/pedidos'
 					className={({ isActive }) =>
-						`transition-all ${isActive ? 'underline underline-offset-4 text-black' : 'hover:underline hover:text-black'}`
+						`${isActive ? 'underline' : 'hover:underline'}`
 					}
 				>
 					Pedidos
 				</NavLink>
 
-				{/* Puedes agregar más links aquí */}
-				<button
-					onClick={handleLogout}
-					className='hover:underline hover:text-black transition-all'
-				>
+				{role === 'admin' && (
+					<NavLink
+						to='/dashboard/productos'
+						className='flex items-center gap-1 hover:underline'
+					>
+						Dashboard
+						<HiOutlineExternalLink
+							size={16}
+							className='inline-block'
+						/>
+					</NavLink>
+				)}
+
+				<button className='hover:underline' onClick={handleLogout}>
 					Cerrar sesión
 				</button>
 			</nav>
 
-			{/* Contenido dinámico */}
-			<main className='w-full max-w-6xl'>
+			<main className='container mt-12 flex-1'>
 				<Outlet />
 			</main>
 		</div>

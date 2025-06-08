@@ -4,6 +4,11 @@ import { useCartStore } from '../../store/cart.store';
 export const ItemsCheckout = () => {
 	const cartItems = useCartStore(state => state.items);
 	const totalAmount = useCartStore(state => state.totalAmount);
+	
+	// Calcular costo de envío
+	const shippingCost = totalAmount > 300000 ? 0 : 20000;
+	// Calcular total incluyendo envío
+	const totalWithShipping = totalAmount + shippingCost;
 
 	return (
 		<div className='w-full max-w-2xl mx-auto'>
@@ -32,7 +37,7 @@ export const ItemsCheckout = () => {
 								<p className='text-sm text-stone-600'>{formatPrice(item.price)}</p>
 							</div>
 							<p className='text-[13px] text-stone-500'>
-								{item.storage} / {item.color}
+								{item.size} / {item.color}
 							</p>
 						</div>
 					</li>
@@ -43,11 +48,13 @@ export const ItemsCheckout = () => {
 			<div className='mt-8 space-y-4 text-sm text-stone-700'>
 				<div className='flex justify-between'>
 					<p className='font-medium'>Envío</p>
-					<p className='uppercase font-medium'>Gratis</p>
+					<p className='uppercase font-medium'>
+						{shippingCost === 0 ? 'Gratis' : formatPrice(shippingCost)}
+					</p>
 				</div>
 				<div className='flex justify-between font-bold text-base text-black'>
 					<p>Total</p>
-					<p>{formatPrice(totalAmount)}</p>
+					<p>{formatPrice(totalWithShipping)}</p>
 				</div>
 			</div>
 		</div>

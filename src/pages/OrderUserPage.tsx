@@ -60,7 +60,7 @@ export const OrderUserPage = () => {
 									<div>
 										<h3 className='font-medium'>{product.productName}</h3>
 										<p className='text-xs text-gray-500'>
-											{product.color_name} / {product.storage}
+											{product.color_name} / {product.size}
 										</p>
 										<p className='text-sm text-gray-700'>
 											{formatPrice(product.price)}

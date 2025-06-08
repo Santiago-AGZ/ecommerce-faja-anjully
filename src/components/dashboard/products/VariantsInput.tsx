@@ -1,199 +1,202 @@
 import {
-  useFieldArray,
-  Control,
-  UseFormRegister,
-  FieldErrors,
-} from "react-hook-form";
-import { ProductFormValues } from "../../../lib/validators";
-import { useState } from "react";
-import { formatPrice } from "../../../helpers";
+	Control,
+	useFieldArray,
+	FieldErrors,
+	UseFormRegister,
+	useWatch,
+} from 'react-hook-form';
+import { ProductFormValues } from '../../../lib/validators';
+import {
+	IoIosAddCircleOutline,
+	IoIosCloseCircleOutline,
+} from 'react-icons/io';
+import { useEffect, useState } from 'react';
 
 interface Props {
-  control: Control<ProductFormValues>;
-  register: UseFormRegister<ProductFormValues>;
-  errors: FieldErrors<ProductFormValues>;
+	control: Control<ProductFormValues>;
+	errors: FieldErrors<ProductFormValues>;
+	register: UseFormRegister<ProductFormValues>;
 }
 
-export const VariantsInput = ({ control, errors }: Props) => {
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "variants",
-  });
+const headersVariants = ['Stock', 'Precio', 'Talla', 'Color', ''];
 
-  const [newVariant, setNewVariant] = useState({
-    size: "",
-    color: "#000000",
-    color_name: "",
-    price: 0,
-    stock: 0,
-  });
+export const VariantsInput = ({
+	control,
+	errors,
+	register,
+}: Props) => {
+	const { fields, remove, append } = useFieldArray({
+		control,
+		name: 'variants',
+	});
 
-  const handleAddVariant = () => {
-    if (!newVariant.size || !newVariant.color_name || newVariant.price <= 0) {
-      return;
-    }
+	const [colorActive, setColorActive] = useState<boolean[]>([]);
 
-    append(newVariant);
-    setNewVariant({
-      size: "",
-      color: "#000000",
-      color_name: "",
-      price: 0,
-      stock: 0,
-    });
-  };
+	const addVariant = () => {
+		append({
+			stock: 0,
+			price: 0,
+			size: '',
+			color: '',
+			colorName: '',
+		});
+	};
 
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <div>
-          <label className="block text-xs font-bold text-slate-900">
-            Talla
-          </label>
-          <input
-            type="text"
-            value={newVariant.size}
-            onChange={(e) =>
-              setNewVariant({ ...newVariant, size: e.target.value })
-            }
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 text-sm focus:outline-none"
-            placeholder="Ej. XS, S, M, L, XL, etc."
-          />
-        </div>
+	const removeVariant = (index: number) => {
+		remove(index);
+	};
 
-        <div>
-          <label className="block text-xs font-bold text-slate-900">
-            Color (hex)
-          </label>
-          <div className="flex items-center mt-1 gap-2">
-            <input
-              type="color"
-              value={newVariant.color}
-              onChange={(e) =>
-                setNewVariant({ ...newVariant, color: e.target.value })
-              }
-              className="h-8 w-8 rounded border border-gray-300"
-            />
-            <input
-              type="text"
-              value={newVariant.color}
-              onChange={(e) =>
-                setNewVariant({ ...newVariant, color: e.target.value })
-              }
-              className="block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 text-sm focus:outline-none"
-              placeholder="#FFFFFF"
-            />
-          </div>
-        </div>
+	const toggleColorActive = (index: number) => {
+		setColorActive(prev =>
+			prev.map((item, i) => (i === index ? !item : item))
+		);
+	};
 
-        <div>
-          <label className="block text-xs font-bold text-slate-900">
-            Nombre color
-          </label>
-          <input
-            type="text"
-            value={newVariant.color_name}
-            onChange={(e) =>
-              setNewVariant({ ...newVariant, color_name: e.target.value })
-            }
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 text-sm focus:outline-none"
-            placeholder="Ej. Negro, Rojo, etc."
-          />
-        </div>
+	// Usar useWatch una sola vez para observar todos los valores del color y del colorName
+	const colorValues = useWatch({
+		control,
+		name: fields.map(
+			(_, index) => `variants.${index}.color` as const
+		),
+	});
 
-        <div>
-          <label className="block text-xs font-bold text-slate-900">
-            Precio
-          </label>
-          <input
-            type="text"
-            value={formatPrice(newVariant.price)}
-            onChange={(e) => {
-              const rawValue = e.target.value.replace(/[^\d]/g, ""); // Elimina todo menos números
-              const numericValue = parseInt(rawValue, 10) || 0;
+	const colorNameValues = useWatch({
+		control,
+		name: fields.map(
+			(_, index) => `variants.${index}.colorName` as const
+		),
+	});
 
-              setNewVariant({
-                ...newVariant,
-                price: numericValue,
-              });
-            }}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 text-sm focus:outline-none"
-            placeholder="$0"
-          />
-        </div>
+	const getFirstError = (
+		variantErros: FieldErrors<ProductFormValues['variants'][number]>
+	) => {
+		if (variantErros) {
+			const keys = Object.keys(
+				variantErros
+			) as (keyof typeof variantErros)[];
+			if (keys.length > 0) {
+				return variantErros[keys[0]]?.message;
+			}
+		}
+	};
 
-        <div>
-          <label className="block text-xs font-bold text-slate-900">
-            Stock
-          </label>
-          <input
-            type="number"
-            min={0}
-            max={10000}
-            step={1}
-            value={newVariant.stock.toString()}
-            onChange={(e) => {
-              const cleaned = e.target.value.replace(/^0+(?=\d)/, ""); // elimina ceros al inicio
-              const parsed = parseInt(cleaned, 10);
-              setNewVariant({
-                ...newVariant,
-                stock: Number.isNaN(parsed) ? 0 : parsed,
-              });
-            }}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 text-sm focus:outline-none"
-          />
-        </div>
-      </div>
+	useEffect(() => {
+		setColorActive(prev =>
+			fields.map((_, index) => prev[index] || false)
+		);
+	}, [fields]);
 
-      <button
-        type="button"
-        onClick={handleAddVariant}
-        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none cursor-pointer"
-        style={{
-          backgroundColor: "#F3C1C0",
-        }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.backgroundColor = "#d9a9a8")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.backgroundColor = "#F3C1C0")
-        }
-      >
-        Añadir Variante
-      </button>
+	return (
+		<div className='flex flex-col gap-3'>
+			<div className='space-y-4 border-b border-slate-200 pb-6'>
+				<div className='grid grid-cols-5 gap-4 justify-start'>
+					{headersVariants.map((header, index) => (
+						<p
+							key={index}
+							className='text-xs font-semibold text-slate-800'
+						>
+							{header}
+						</p>
+					))}
+				</div>
+				{fields.map((field, index) => (
+					<div key={field.id}>
+						<div className='grid grid-cols-5 gap-4 items-center'>
+							<input
+								type='number'
+								placeholder='Stock'
+								{...register(`variants.${index}.stock`, {
+									valueAsNumber: true,
+								})}
+								className='border rounded-md px-3 py-1.5 text-xs font-semibold placeholder:font-normal focus:outline-none appearance-none'
+							/>
 
-      <div className="space-y-2">
-        {fields.map((field, index) => (
-          <div
-            key={field.id}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded-md"
-          >
-            <div className="flex items-center space-x-4">
-              <span className="text-sm font-medium">{field.size}</span>
-              <div className="flex items-center">
-                <div
-                  className="w-5 h-5 rounded-full border border-gray-300"
-                  style={{ backgroundColor: field.color }}
-                ></div>
-                <span className="ml-2 text-sm">{field.color_name}</span>
-              </div>
-              <span className="text-sm">{formatPrice(field.price)}</span>
-              <span className="text-sm">Stock: {field.stock}</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => remove(index)}
-              className="text-red-500 hover:text-red-700 text-sm cursor-pointer"
-            >
-              Eliminar
-            </button>
-          </div>
-        ))}
-      </div>
+							<input
+								type='number'
+								step='0.01'
+								placeholder='Precio'
+								{...register(`variants.${index}.price`, {
+									valueAsNumber: true,
+								})}
+								className='border rounded-md px-3 py-1.5 text-xs font-semibold placeholder:font-normal focus:outline-none appearance-none'
+							/>
 
-      {errors.variants && (
-        <p className="text-red-500 text-xs mt-2">{errors.variants.message}</p>
-      )}
-    </div>
-  );
+							<input
+								type='text'
+								placeholder='XL'
+								{...register(`variants.${index}.size`)}
+								className='border rounded-md px-3 py-1.5 text-xs font-semibold placeholder:font-normal focus:outline-none appearance-none'
+							/>
+
+							<div className='flex relative'>
+								{colorActive[index] && (
+									<div className='absolute bg-stone-100 rounded-md bottom-8 left-[40px] p-1 w-[100px] h-fit space-y-2'>
+										<input
+											type='color'
+											{...register(`variants.${index}.color`)}
+											className='rounded-md px-1 py-1.5 w-full'
+										/>
+
+										<input
+											type='text'
+											placeholder='Nombre Color '
+											{...register(`variants.${index}.colorName`)}
+											className='rounded-md px-1 py-1.5 w-full text-xs focus:outline-none font-semibold placeholder:font-normal'
+										/>
+									</div>
+								)}
+								<button
+									className='border w-full h-8 cursor-pointer rounded text-xs font-medium flex items-center justify-center'
+									type='button'
+									onClick={() => toggleColorActive(index)}
+								>
+									{colorValues[index] && colorNameValues[index] ? (
+										<span
+											className={`inline-block w-4 h-4 rounded-full bg-block`}
+											style={{
+												backgroundColor: colorValues[index],
+											}}
+										/>
+									) : (
+										'Añadir'
+									)}
+								</button>
+							</div>
+
+							<div className='flex justify-end'>
+								<button
+									type='button'
+									onClick={() => removeVariant(index)}
+									className='p-1'
+								>
+									<IoIosCloseCircleOutline size={20} />
+								</button>
+							</div>
+						</div>
+
+						{errors.variants && errors.variants[index] && (
+							<p className='text-red-500 text-xs mt-1'>
+								{getFirstError(errors.variants[index])}
+							</p>
+						)}
+					</div>
+				))}
+			</div>
+
+			<button
+				type='button'
+				onClick={addVariant}
+				className='px-4 py-2 text-slate-800 rounded-md text-sm font-semibold tracking-tight flex items-center gap-1 self-center hover:bg-slate-100'
+			>
+				<IoIosAddCircleOutline size={16} />
+				Añadir Variante
+			</button>
+
+			{fields.length === 0 && errors.variants && (
+				<p className='text-red-500 text-xs mt-1'>
+					Debes añadir al menos una variante
+				</p>
+			)}
+		</div>
+	);
 };

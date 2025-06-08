@@ -1,23 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createProduct } from '../../actions';
-import { useNavigate } from 'react-router-dom';
+import { updateOrderStatus } from '../../actions';
 import toast from 'react-hot-toast';
 
-export const useCreateProduct = () => {
+export const useChangeStatusOrder = () => {
 	const queryClient = useQueryClient();
-	const navigate = useNavigate();
 
 	const { mutate, isPending } = useMutation({
-		mutationFn: createProduct,
+		mutationFn: updateOrderStatus,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ['products'],
+				queryKey: ['orders', 'admin'],
 			});
-			navigate('/dashboard/productos');
 		},
 		onError: error => {
-			toast.error('Ocurrió un error al crear el producto');
 			console.log(error);
+			toast.error('No se pudo actualizar el estado de la orden', {
+				position: 'bottom-right',
+			});
 		},
 	});
 
