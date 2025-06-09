@@ -35,7 +35,7 @@ export const Sidebar = () => {
 			</nav>
 
 			<button
-				className='bg-[#6d3843] w-full py-[10px] rounded-md flex items-center justify-center gap-2 font-semibold text-sm hover:underline'
+				className='bg-[#6d3843] w-full py-[10px] rounded-md flex items-center justify-center gap-2 font-semibold text-sm hover:underline cursor-pointer'
 				onClick={handleLogout}
 			>
 				<span className='hidden lg:block'>Cerrar sesión</span>
