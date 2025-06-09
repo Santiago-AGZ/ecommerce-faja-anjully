@@ -48,7 +48,7 @@ export const Search = () => {
 						{searchResults.map(product => (
 							<li key={product.id} className="hover:bg-gray-50 transition-colors">
 								<button
-									className='w-full px-6 py-4 text-left'
+									className='w-full px-6 py-4 text-left cursor-pointer'
 									onClick={() => {
 										navigate(`/productos/${product.slug}`);
 										closeSheet();
