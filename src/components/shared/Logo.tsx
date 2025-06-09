@@ -8,7 +8,7 @@ export const Logo = ({ isDashboard }: Props) => {
     return (
         <Link 
             to="/" 
-            className={`flex items-center gap-1 text-2xl font-bold tracking-tighter transition-all text-[#6d3843] ${
+            className={`flex items-center gap-1 text-2xl font-bold tracking-tighter transition-all text-[#6d3843] cursor-pointer ${
                 isDashboard && 'hover:scale-105'
             }`}
         >
