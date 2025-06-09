@@ -48,7 +48,7 @@ export const Navbar = () => {
 			<div className='flex items-center justify-end flex-1 gap-6'>
 				<button
 					onClick={() => openSheet('search')}
-					className='hover:text-[#6d3843] transition-colors'
+					className='hover:text-[#6d3843] transition-colors cursor-pointer'
 				>
 					<HiOutlineSearch size={25} />
 				</button>
@@ -74,7 +74,7 @@ export const Navbar = () => {
 				)}
 
 				<button
-					className='relative hover:text-[#6d3843] transition-colors'
+					className='relative hover:text-[#6d3843] transition-colors cursor-pointer'
 					onClick={() => openSheet('cart')}
 				>
 					<span className='absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full'>

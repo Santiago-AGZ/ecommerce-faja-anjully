@@ -36,7 +36,7 @@ export const Search = () => {
 						autoFocus
 					/>
 				</form>
-				<button onClick={closeSheet} className="ml-4">
+				<button onClick={closeSheet} className="ml-4 cursor-pointer">
 					<IoMdClose size={22} className='text-gray-500 hover:text-gray-700' />
 				</button>
 			</div>
