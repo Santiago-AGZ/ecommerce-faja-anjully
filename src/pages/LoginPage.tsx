@@ -4,73 +4,85 @@ import { Link, Navigate } from 'react-router-dom';
 import { useLogin } from '../hooks';
 import { Loader } from '../components/shared/Loader';
 import { useUser } from '@/hooks/auth/useUser';
+import { FiEye, FiEyeOff } from 'react-icons/fi'; // 👈 Importa los íconos
 
 export const LoginPage = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // 👈 Estado para mostrar/ocultar
 
-	const { mutate, isPending } = useLogin();
-	const { session, isLoading } = useUser();
+    const { mutate, isPending } = useLogin();
+    const { session, isLoading } = useUser();
 
-	const onLogin = (e: React.FormEvent) => {
-		e.preventDefault();
+    const onLogin = (e: React.FormEvent) => {
+        e.preventDefault();
 
-		mutate({ email, password });
-	};
+        mutate({ email, password });
+    };
 
-	if (isLoading) return <Loader />;
+    if (isLoading) return <Loader />;
 
-	if (session) return <Navigate to='/' />;
+    if (session) return <Navigate to='/' />;
 
-	return (
-		<div className='h-full flex flex-col items-center mt-12 gap-5'>
-			<h1 className='text-4xl font-bold capitalize'>
-				Iniciar sesión
-			</h1>
+    return (
+        <div className='h-full flex flex-col items-center mt-12 gap-5'>
+            <h1 className='text-4xl font-bold capitalize'>
+                Iniciar sesión
+            </h1>
 
-			<p className='text-sm font-medium'>
-				¡Que bueno tenerte de vuelta!
-			</p>
+            <p className='text-sm font-medium'>
+                ¡Que bueno tenerte de vuelta!
+            </p>
 
-			{isPending ? (
-				<div className='w-full h-full flex justify-center mt-20'>
-					<LuLoader className='animate-spin' size={60} />
-				</div>
-			) : (
-				<>
-					<form
-						className='flex flex-col items-center gap-4 w-full mt-10 sm:w-[400px] lg:w-[500px]'
-						onSubmit={onLogin}
-					>
-						<input
-							type='email'
-							placeholder='Ingresa tu correo electrónico'
-							className='border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full'
-							value={email}
-							onChange={e => setEmail(e.target.value)}
-						/>
+            {isPending ? (
+                <div className='w-full h-full flex justify-center mt-20'>
+                    <LuLoader className='animate-spin' size={60} />
+                </div>
+            ) : (
+                <>
+                    <form
+                        className='flex flex-col items-center gap-4 w-full mt-10 sm:w-[400px] lg:w-[500px]'
+                        onSubmit={onLogin}
+                    >
+                        <input
+                            type='email'
+                            placeholder='Ingresa tu correo electrónico'
+                            className='border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full'
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
 
-						<input
-							type='password'
-							placeholder='Ingresa tu contraseña'
-							className='border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full'
-							value={password}
-							onChange={e => setPassword(e.target.value)}
-						/>
+                        <div className="relative w-full">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder='Ingresa tu contraseña'
+                                className='border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full pr-12'
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                            <button
+                                type="button"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-gray-500 cursor-pointer"
+                                onClick={() => setShowPassword(prev => !prev)}
+                                tabIndex={-1}
+                            >
+                                {showPassword ? <FiEyeOff /> : <FiEye />}
+                            </button>
+                        </div>
 
-						<button className='bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full mt-5 w-full'>
-							Iniciar sesión
-						</button>
-					</form>
+                        <button className='bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full mt-5 w-full'>
+                            Iniciar sesión
+                        </button>
+                    </form>
 
-					<p className='text-sm text-stone-800'>
-						¿No tienes una cuenta?
-						<Link to='/registro' className='underline ml-2'>
-							Regístrate
-						</Link>
-					</p>
-				</>
-			)}
-		</div>
-	);
+                    <p className='text-sm text-stone-800'>
+                        ¿No tienes una cuenta?
+                        <Link to='/registro' className='underline ml-2'>
+                            Regístrate
+                        </Link>
+                    </p>
+                </>
+            )}
+        </div>
+    );
 };
