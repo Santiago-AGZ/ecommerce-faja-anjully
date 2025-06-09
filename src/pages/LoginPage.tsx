@@ -4,12 +4,12 @@ import { Link, Navigate } from 'react-router-dom';
 import { useLogin } from '../hooks';
 import { Loader } from '../components/shared/Loader';
 import { useUser } from '@/hooks/auth/useUser';
-import { FiEye, FiEyeOff } from 'react-icons/fi'; // 👈 Importa los íconos
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false); // 👈 Estado para mostrar/ocultar
+    const [showPassword, setShowPassword] = useState(false);
 
     const { mutate, isPending } = useLogin();
     const { session, isLoading } = useUser();
@@ -66,7 +66,7 @@ export const LoginPage = () => {
                                 onClick={() => setShowPassword(prev => !prev)}
                                 tabIndex={-1}
                             >
-                                {showPassword ? <FiEyeOff /> : <FiEye />}
+                                {showPassword ? <FiEye /> : <FiEyeOff />}
                             </button>
                         </div>
 
