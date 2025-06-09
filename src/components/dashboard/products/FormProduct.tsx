@@ -227,13 +227,13 @@ export const FormProduct = ({ titleForm }: Props) => {
 
                 <div className='flex gap-3 absolute top-0 right-0'>
                     <button
-                        className='btn-secondary-outline'
+                        className='btn-secondary-outline cursor-pointer'
                         type='button'
                         onClick={() => navigate(-1)}
                     >
                         Cancelar
                     </button>
-                    <button className='btn-primary' type='submit'>
+                    <button className='btn-primary cursor-pointer' type='submit'>
                         Guardar Producto
                     </button>
                 </div>

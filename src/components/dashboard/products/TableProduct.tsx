@@ -125,7 +125,7 @@ export const TableProduct = () => {
 										<CellTableProduct content={product.name} />
 										<td className='p-4 font-medium tracking-tighter'>
 											<select
-												className='border border-gray-300 rounded-md p-1 w-full'
+												className='border border-gray-300 rounded-md p-1 w-full cursor-pointer'
 												onChange={e =>
 													handleVariantChange(
 														product.id,
@@ -157,7 +157,7 @@ export const TableProduct = () => {
 										/>
 										<td className='relative'>
 											<button
-												className='text-slate-900'
+												className='text-slate-900 cursor-pointer'
 												onClick={() => handleMenuToggle(index)}
 											>
 												<FaEllipsis />
@@ -178,7 +178,7 @@ export const TableProduct = () => {
 														/>
 													</Link>
 													<button
-														className='block w-full text-left px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100'
+														className='block w-full text-left px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 cursor-pointer'
 														onClick={() =>
 															handleDeleteProduct(product.id)
 														}

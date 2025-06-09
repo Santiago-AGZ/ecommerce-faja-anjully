@@ -21,7 +21,7 @@ export const MenuBar = ({
 	editor: EditorType | null;
 }) => {
 	const buttonClass = (isActive: boolean) =>
-		`w-8 h-7 grid place-items-center  border text-sm rounded transition-all ${
+		`w-8 h-7 grid place-items-center  border text-sm rounded transition-all cursor-pointer ${
 			isActive
 				? 'border-blue-500 bg-blue-100 text-blue-700'
 				: 'border-gray-300 bg-white text-gray-600 hover:bg-gray-100'

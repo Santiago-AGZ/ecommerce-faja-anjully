@@ -148,7 +148,7 @@ export const SelectInput = ({
                     <button
                         type='button'
                         onClick={handleAddOption}
-                        className='bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600'
+                        className='bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 cursor-pointer'
                     >
                         Añadir
                     </button>
