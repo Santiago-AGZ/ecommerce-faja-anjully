@@ -21,7 +21,7 @@ export const Navbar = () => {
 	const { data: customer } = useCustomer(userId!);
 
 	return (
-		<header className='bg-[#c4879b] text-[#fbeaea] py-2 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12'>
+		<header className='bg-[#F3C1C0] text-[#000000] py-2 flex items-center justify-between px-5 border-b border-[#d19ba1] lg:px-12'>
 			<div className='flex items-center justify-start flex-1'>
 				<Logo />
 			</div>
@@ -34,8 +34,8 @@ export const Navbar = () => {
 							to={link.href}
 							className={({ isActive }) =>
 								`text-lg ${isActive
-									? "text-[#6d3843] font-semibold underline"
-									: "text-[#fbeaea] hover:text-[#6d3843]"
+									? "text-[#FFFFFF] font-semibold underline"
+									: "text-[#000000] hover:text-[#6d3843]"
 								} transition-all duration-300`
 							}
 						>
